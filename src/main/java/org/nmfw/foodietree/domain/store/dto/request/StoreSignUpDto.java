@@ -28,7 +28,7 @@ public class StoreSignUpDto {
 
     @NotBlank(message = "비밀번호는 필수 값입니다")
 //    @Size(min = 8, message = "비밀번호는 8글자 이상이어야합니다")
-    @Pattern(regexp = "^[a-zA-Z]{8,}$", message = "비밀번호는 영문이어야합니다.")
+    @Pattern(regexp = "^[a-zA-Z]{8,}$", message = "비밀번호는 영문, 8글자 이상이어야합니다.")
     private String password;
 
     private StoreCategory category;
