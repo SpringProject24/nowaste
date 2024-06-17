@@ -11,4 +11,12 @@
     VALUES (#{storeId}, #{password}, #{category}, #{address}, #{approve}, #{warningCount}, #{price}, #{businessNumber})
   </insert>
 
+  <select id="findOne" resultType="store">
+    SELECT
+      storeId,
+      password
+    FROM tbl_store
+    WHERE storeId = #{storeId}
+  </select>
+
 </mapper>
