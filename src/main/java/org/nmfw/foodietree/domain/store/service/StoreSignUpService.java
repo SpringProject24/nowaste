@@ -24,11 +24,12 @@ public class StoreSignUpService {
      */
     public boolean storeSignUp(StoreSignUpDto dto) {
 
+        log.info("{}", dto.toString());
         Store store = dto.toEntity();
 
         String encodedPassword = encoder.encode(dto.getPassword());
         store.setPassword(encodedPassword);
-
-        return storeMapper.save(store);
+        log.debug("encodedPassword: " + encodedPassword);
+        return storeMapper.storeSave(store);
     }
 }
