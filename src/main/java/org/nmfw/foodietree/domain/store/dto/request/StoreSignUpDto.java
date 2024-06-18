@@ -42,4 +42,9 @@ public class StoreSignUpDto {
     private int price;
 
     private String businessNumber;
+
+    // 가게 프로필 이미지 주소 변수 추가
+    private String profileImage;
+
+
 }
