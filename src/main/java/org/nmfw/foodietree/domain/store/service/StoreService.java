@@ -2,6 +2,7 @@ package org.nmfw.foodietree.domain.store.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.nmfw.foodietree.domain.store.dto.request.LoginDto;
 import org.nmfw.foodietree.domain.store.dto.request.StoreLoginDto;
 import org.nmfw.foodietree.domain.store.dto.request.StoreSignUpDto;
 import org.nmfw.foodietree.domain.store.dto.resp.StoreDto;
@@ -21,6 +22,16 @@ public class StoreService {
     private final StoreMapper storeMapper;
     private final PasswordEncoder encoder;
 
+    //회원가입중간 처리
+    public boolean join(LoginDto dto) {
+        Store store = dto.toEntity();
+
+        //비번 인코딩
+        String encodedPassword = encoder.encode(dto.getPassword());
+        store.setPassword(encodedPassword);
+
+        return storeMapper.save(store);
+    }
 
     //로그인 검증 처리
     public StoreLoginResult authenticate(StoreLoginDto dto, HttpSession session, HttpServletResponse response) {

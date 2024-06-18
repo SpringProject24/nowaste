@@ -13,10 +13,10 @@
 
   <select id="findOne" resultType="store">
     SELECT
-      storeId,
+      store_id,
       password
     FROM tbl_store
-    WHERE storeId = #{storeId}
+    WHERE store_id = #{storeId}
   </select>
 
 </mapper>

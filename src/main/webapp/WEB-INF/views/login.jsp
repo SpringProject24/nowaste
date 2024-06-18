@@ -8,7 +8,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <title>Insert title here</title>
   </head>
   <body>
-    <form action="/members/sign-in" name="sign-in" method="post" id="signInForm">
+    <form action="/login" name="sign-in" method="post" id="signInForm">
       <table class="table">
           <tr>
               <td class="text-left">

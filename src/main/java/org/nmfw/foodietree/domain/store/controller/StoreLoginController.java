@@ -53,10 +53,9 @@ public class StoreLoginController {
                 session.removeAttribute("redirect");
                 return "redirect:" + redirect;
             }
-
             return "redirect:/"; // 로그인 성공시
         }
-
+        System.out.println("sdsds");
         return "redirect:/login";
 
 
