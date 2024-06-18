@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
+@Transactional
 class StoreSignUpServiceTest {
     @Autowired
     StoreMapper storeMapper;
