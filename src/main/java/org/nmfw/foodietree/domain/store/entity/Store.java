@@ -10,6 +10,7 @@ import org.nmfw.foodietree.domain.store.entity.value.StoreCategory;
 @Builder
 public class Store {
     private String storeId;
+    @Setter
     private String password;
     private StoreCategory category;
     private String address;
