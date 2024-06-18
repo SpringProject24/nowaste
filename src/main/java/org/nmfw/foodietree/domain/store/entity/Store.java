@@ -1,12 +1,14 @@
 package org.nmfw.foodietree.domain.store.entity;
 
 import lombok.*;
+import java.time.LocalDateTime;
 
 @Getter @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Store {
+
     private String storeId;
     private String password;
     private String category;
@@ -15,4 +17,5 @@ public class Store {
     private int warningCount;
     private int price;
     private String businessNumber;
+
 }
