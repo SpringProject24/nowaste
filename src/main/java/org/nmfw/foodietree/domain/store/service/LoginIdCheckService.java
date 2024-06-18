@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class LoginIdCheckService {
 
-    private LoginIdCheckMapper loginIdCheckMapper;
+    private final LoginIdCheckMapper loginIdCheckMapper;
 
     // 아이디, 이메일 중복검사
     public boolean checkIdentifier(String type, String keyword) {
