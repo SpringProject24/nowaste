@@ -8,10 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Slf4j
 @RequiredArgsConstructor
+@RequestMapping("/store")
 public class StoreSignUpController {
     private final StoreSignUpService storeSignUpService;
 
@@ -20,13 +22,22 @@ public class StoreSignUpController {
      * @param dto
      * @return StoreSignUpService에서 성공적으로 회원가입완료시 다음페이지로 이동
      */
-    @PostMapping("/store-sign-up")
-    public String StoreSignUp(@Validated StoreSignUpDto dto) {
+    @PostMapping("/sign-up")
+    public String StoreSignUp(@Validated  StoreSignUpDto dto) {
         log.info("/store-sign-up POST");
-        log.debug("parameter:{}", dto);
+        log.info("parameter:{}", dto);
 
         boolean flag = storeSignUpService.storeSignUp(dto);
+        if (flag) {
+            log.debug("회원가입 성공");
+        } else {
+            log.debug("회원가입 실패");
+        }
+        return "store-signup-test";
+    }
 
-        return " ";
+    @GetMapping("/sign-up-form")
+    public String StoreSignUpForm() {
+        return "store-signup-test";
     }
 }
