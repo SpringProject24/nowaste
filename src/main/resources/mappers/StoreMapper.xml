@@ -19,4 +19,9 @@
     WHERE store_id = #{storeId}
   </select>
 
+  <insert id="storeSave">
+    INSERT INTO tbl_store
+      (store_id, password)
+    VALUES (#{storeId}, #{password})
+  </insert>
 </mapper>

@@ -11,6 +11,6 @@ public interface StoreMapper {
 
     //회원 정보 개별 조회
     Store findOne(String storeId);
-
-
+    
+    boolean storeSave(Store store);
 }
