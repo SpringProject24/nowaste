@@ -8,7 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class Customer {
-
     private String customerId;
     private String customerPassword;
     private String nickname;
