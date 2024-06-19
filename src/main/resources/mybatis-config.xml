@@ -7,11 +7,13 @@
   <settings>
     <setting name="mapUnderscoreToCamelCase" value="true"/>
   </settings>
+
   <typeAliases>
-<!--    <typeAlias type="com.hoho.springstudy.database.chap01.Person" alias="person"/>-->
+    <typeAlias type="org.nmfw.foodietree.domain.customer.entity.Customer" alias="customer"/>
   </typeAliases>
+
   <mappers>
-    <mapper resource="mappers/StoreMapper.xml" />
+    <mapper resource="mappers/CustomerMapper.xml" />
   </mappers>
 
 </configuration>
