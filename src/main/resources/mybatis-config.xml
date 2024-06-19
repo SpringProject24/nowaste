@@ -9,10 +9,12 @@
   </settings>
   <typeAliases>
 <!--    <typeAlias type="com.hoho.springstudy.database.chap01.Person" alias="person"/>-->
+    <typeAlias type="org.nmfw.foodietree.domain.customer.entity.Customer" alias="customer"/>
   </typeAliases>
   <mappers>
     <mapper resource="mappers/StoreMapper.xml" />
       <mapper resource="mappers/LoginIdCheckMapper.xml"/>
+      <mapper resource="mappers/CustomerMyPageMapper.xml"/>
   </mappers>
 
 </configuration>
