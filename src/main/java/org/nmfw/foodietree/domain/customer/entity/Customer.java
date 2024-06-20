@@ -12,6 +12,7 @@ public class Customer {
     //고객 id
     private String customerId;
     //고객 비밀번호
+    @Setter
     private String customerPassword;
     //고객 이름
     private String nickName;

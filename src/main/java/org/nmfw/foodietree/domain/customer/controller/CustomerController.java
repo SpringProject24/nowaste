@@ -21,7 +21,7 @@ public class CustomerController {
     }
 
     //로그인 요청 처리
-    @PostMapping
+    @PostMapping("/sign-in")
     public String signIn(CustomerLoginDto dto) {
         log.info("/customer/sign-in POST");
         log.debug("parameter: {}", dto);
