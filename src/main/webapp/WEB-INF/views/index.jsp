@@ -57,4 +57,10 @@
   </div>
 </footer>
 </body>
+<script>
+  const $storeSignup = document.querySelector('.store-signup');
+    $storeSignup.addEventListener('click', () => {
+        location.href = '/store/sign-up';
+    });
+</script>
 </html>

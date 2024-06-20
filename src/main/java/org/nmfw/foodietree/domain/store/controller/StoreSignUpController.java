@@ -34,11 +34,11 @@ public class StoreSignUpController {
         } else {
             log.debug("회원가입 실패");
         }
-        return "store-signup-test";
+        return "redirect:/";
     }
 
     @GetMapping("/sign-up")
     public String StoreSignUpForm() {
-        return "store-signup-test";
+        return "store/sign-up";
     }
 }
