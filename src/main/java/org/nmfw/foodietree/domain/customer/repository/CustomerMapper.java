@@ -1,6 +1,7 @@
 package org.nmfw.foodietree.domain.customer.repository;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.nmfw.foodietree.domain.customer.entity.Customer;
 
 @Mapper
@@ -18,5 +19,5 @@ public interface CustomerMapper {
      * @return - 중복이면 true, 아니면 false
      */
     // 중복 확인
-    boolean existsById(String type, String keyword);
+    boolean existsById(@Param("customerId") String customerId);
 }
