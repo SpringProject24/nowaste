@@ -68,7 +68,7 @@
             return;
         }
 
-        const res = await fetch(`http://localhost:8083/store/check?type=account&keyword=${$inputId.value}`);
+        const res = await fetch(`http://localhost:8083/store/check?type=account&keyword=\${$inputId.value}`);
         const result = await res.json();
         if (result) {
             $h2Id.textContent = '이미 사용중인 이메일입니다.';
