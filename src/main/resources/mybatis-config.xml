@@ -10,6 +10,7 @@
   <typeAliases>
 <!--    <typeAlias type="com.hoho.springstudy.database.chap01.Person" alias="person"/>-->
     <typeAlias type="org.nmfw.foodietree.domain.customer.entity.Customer" alias="customer"/>
+    <typeAlias type="org.nmfw.foodietree.domain.customer.dto.resp.CustomerMyPageDto" alias="CustomerMyPageDto"/>
   </typeAliases>
   <mappers>
     <mapper resource="mappers/StoreMapper.xml" />
