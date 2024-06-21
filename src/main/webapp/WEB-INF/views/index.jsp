@@ -56,11 +56,11 @@
     <p>&copy; 2024 FoodieTree. All rights reserved.</p>
   </div>
 </footer>
-</body>
-<script>
+  <script>
   const $storeSignup = document.querySelector('.store-signup');
     $storeSignup.addEventListener('click', () => {
         location.href = '/store/sign-up';
     });
 </script>
+</body>
 </html>
