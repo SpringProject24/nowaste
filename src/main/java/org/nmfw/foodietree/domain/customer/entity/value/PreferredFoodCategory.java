@@ -1,13 +1,10 @@
 package org.nmfw.foodietree.domain.customer.entity.value;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 @Getter
 @ToString
-@AllArgsConstructor
 public enum PreferredFoodCategory {
     //    한식, 양식, 카페, 일식, 디저트, 중식, 기타
     KOREAN("한식"),
@@ -19,6 +16,10 @@ public enum PreferredFoodCategory {
     ELSE("기타");
 
     private final String koreanName;
+
+    PreferredFoodCategory(String koreanName) {
+        this.koreanName = koreanName;
+    }
 
     public static PreferredFoodCategory fromKoreanName(String koreanName) {
         for (PreferredFoodCategory category : values()) {
