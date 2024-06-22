@@ -28,8 +28,8 @@ public class CustomerService {
     }
 
     //아이디(이메일) 중복 검사
-    public boolean checkIdentifier(String keyword) {
-        return customerMapper.existsById(keyword);
+    public boolean checkIdentifier(String type) {
+        return customerMapper.existsById(type);
     }
 }
 
