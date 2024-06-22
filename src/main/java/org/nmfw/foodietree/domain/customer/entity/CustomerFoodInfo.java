@@ -1,9 +1,8 @@
 package org.nmfw.foodietree.domain.customer.entity;
 
 import lombok.*;
-import org.nmfw.foodietree.domain.customer.entity.value.PreferredFoodCategory;
 
-@Getter
+@Getter @Setter
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
@@ -12,5 +11,5 @@ import org.nmfw.foodietree.domain.customer.entity.value.PreferredFoodCategory;
 public class CustomerFoodInfo {
     private int id;
     private String customerId;
-    private PreferredFoodCategory preferredFood;
+    private String preferredFood;
 }

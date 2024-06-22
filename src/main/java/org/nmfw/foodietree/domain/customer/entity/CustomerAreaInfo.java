@@ -2,7 +2,7 @@ package org.nmfw.foodietree.domain.customer.entity;
 
 import lombok.*;
 
-@Getter
+@Getter @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor

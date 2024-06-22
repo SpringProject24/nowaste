@@ -5,16 +5,15 @@
 
 <mapper namespace="org.nmfw.foodietree.domain.customer.mapper.CustomerMyPageMapper">
 
-    <resultMap id="CustomerResultMap" type="org.nmfw.foodietree.domain.customer.dto.resp.CustomerMyPageDto">
-        <result property="customerId" column="customer_id"/>
-        <result property="customerPhoneNumber" column="customer_phone_number"/>
-        <result property="nickname" column="nickname"/>
-        <result property="profileImage" column="profile_image"/>
+    <resultMap id="CustomerMyPageResultMap" type="org.nmfw.foodietree.domain.customer.dto.resp.CustomerMyPageDto">
+        <id property="customerId" column="customer_id" />
+        <result property="nickname" column="nickname" />
+        <result property="profileImage" column="profile_img" />
+        <result property="customerPhoneNumber" column="customer_phone_number" />
     </resultMap>
 
-
     <!-- Customer 정보 가져오기 -->
-    <select id="findOne" resultMap="CustomerResultMap">
+    <select id="findOne" resultType="CustomerMyPageDto">
         SELECT
             customer_id,
             customer_phone_number,

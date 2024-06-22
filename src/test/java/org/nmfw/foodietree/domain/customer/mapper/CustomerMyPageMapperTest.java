@@ -3,8 +3,6 @@ package org.nmfw.foodietree.domain.customer.mapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.nmfw.foodietree.domain.customer.dto.resp.CustomerMyPageDto;
-import org.nmfw.foodietree.domain.customer.dto.resp.CustomerPreferenceAreaDto;
-import org.nmfw.foodietree.domain.customer.dto.resp.CustomerPreferenceFoodDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

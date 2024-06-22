@@ -56,9 +56,9 @@
 <form action="/customer/mypage-main" id="customer-mypage-main" method="post">
     <div class="container">
         <div class="profile">
-            <img src="path/to/default/profile/image.jpg" alt="Customer profile image">
-            <h3><%= request.getAttribute("username") %></h3>
-            <p><%= request.getAttribute("email") %></p>
+            <img src="${customerMyPageDto.profileImage}" alt="Customer profile image">
+            <h3>${customerMyPageDto.nickname}</h3>
+            <p>${customerMyPageDto.customerId}</p>
             <h4>마이페이지</h4>
             <p>개인정보수정</p>
         </div>
@@ -73,6 +73,18 @@
                     </div>
                 </c:forEach>
             </div>
+            <h4>선호 지역</h4>
+            <ul>
+                <c:forEach var="area" items="${customerMyPageDto.preferredArea}">
+                    <li>${area}</li>
+                </c:forEach>
+            </ul>
+            <h4>선호 음식</h4>
+            <ul>
+                <c:forEach var="food" items="${customerMyPageDto.preferredFood}">
+                    <li>${food}</li>
+                </c:forEach>
+            </ul>
             <div class="stats">
                 <div>10kg의 음쓰를 줄였습니다</div>
                 <div>지금까지 10만원을 아꼈어요</div>
