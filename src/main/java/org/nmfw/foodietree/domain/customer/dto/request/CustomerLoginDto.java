@@ -4,7 +4,7 @@ import lombok.*;
 import org.hibernate.validator.constraints.br.TituloEleitoral;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@Getter @ToString
+@Setter @Getter @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode

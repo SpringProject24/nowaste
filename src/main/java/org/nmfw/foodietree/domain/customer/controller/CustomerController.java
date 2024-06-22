@@ -17,6 +17,7 @@ public class CustomerController {
     //로그인 양식 열기(조회)
     @GetMapping("/sign-in")
     public void signIn() {
+        System.out.println("sign-in open test");
         log.info("customer/sign-in GET : forwarding to sign-in.jsp");
     }
 
