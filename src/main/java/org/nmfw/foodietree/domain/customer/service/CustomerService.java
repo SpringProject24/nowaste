@@ -30,6 +30,7 @@ public class CustomerService {
         return customerMapper.save(customer);
     }
 
+    //로그인 검증 처리
     public LoginResult authenticate(CustomerLoginDto dto) {
 
         String customerId = dto.getCustomerId();
