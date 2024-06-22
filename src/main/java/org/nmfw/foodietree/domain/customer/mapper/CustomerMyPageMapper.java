@@ -2,13 +2,23 @@ package org.nmfw.foodietree.domain.customer.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.nmfw.foodietree.domain.customer.entity.Customer;
+import org.nmfw.foodietree.domain.customer.dto.resp.CustomerMyPageDto;
+import org.nmfw.foodietree.domain.customer.dto.resp.CustomerPreferenceAreaDto;
+import org.nmfw.foodietree.domain.customer.dto.resp.CustomerPreferenceFoodDto;
+
+import java.util.List;
 
 @Mapper
 public interface CustomerMyPageMapper {
 
     // 회원 정보 개별조회
-    Customer findOne(String customerId);
+    CustomerMyPageDto findOne(String customerId);
+
+    // 회원 선호 지역 조회
+    CustomerPreferenceAreaDto findPreferenceAreas(@Param("customerId") String customerId);
+
+    // 회원 선호 음식 조회
+    List<CustomerPreferenceFoodDto> findPreferenceFoods(@Param("customerId") String customerId);
 
     /**
      * 회원정보 업데이트
@@ -22,4 +32,22 @@ public interface CustomerMyPageMapper {
             @Param("type") String type,
             @Param("value") String value
     );
+
+    /**
+     *
+     * @param customerId : 업데이트할 회원 아이디
+     * @param preferredValue : preferredFood는 enum인 PreferredFoodCategory
+     */
+    void updateCustomerPreference(
+            @Param("customerId") String customerId,
+            @Param("preferredValue") String preferredValue
+            );
+
+    // 예약 업데이트
+    void updateReservation(String customerId);
+
+    // 픽업 확인
+    void confirmPickUp(String customerId);
+
+
 }

@@ -11,6 +11,8 @@
 <!--    <typeAlias type="com.hoho.springstudy.database.chap01.Person" alias="person"/>-->
     <typeAlias type="org.nmfw.foodietree.domain.customer.entity.Customer" alias="customer"/>
     <typeAlias type="org.nmfw.foodietree.domain.customer.dto.resp.CustomerMyPageDto" alias="CustomerMyPageDto"/>
+    <typeAlias type="org.nmfw.foodietree.domain.customer.dto.resp.CustomerPreferenceAreaDto" alias="CustomerPreferenceAreaDto"/>
+    <typeAlias type="org.nmfw.foodietree.domain.customer.dto.resp.CustomerPreferenceFoodDto" alias="CustomerPreferenceFoodDto"/>
   </typeAliases>
   <mappers>
     <mapper resource="mappers/StoreMapper.xml" />

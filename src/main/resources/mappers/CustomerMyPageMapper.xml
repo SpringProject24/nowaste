@@ -5,15 +5,45 @@
 
 <mapper namespace="org.nmfw.foodietree.domain.customer.mapper.CustomerMyPageMapper">
 
-    <select id="findOne" resultType="customer">
+    <resultMap id="CustomerResultMap" type="org.nmfw.foodietree.domain.customer.dto.resp.CustomerMyPageDto">
+        <result property="customerId" column="customer_id"/>
+        <result property="customerPhoneNumber" column="customer_phone_number"/>
+        <result property="nickname" column="nickname"/>
+        <result property="profileImage" column="profile_image"/>
+    </resultMap>
+
+    <!-- Customer 정보 가져오기 -->
+    <select id="getCustomerInfo" resultMap="CustomerResultMap">
         SELECT
-            customer_id
-            , customer_password
-            , nickname
-            , customer_phone_number
-            , profile_image
-        FROM tbl_customer
-        WHERE customer_id = #{customerId}
+            customer_id,
+            customer_phone_number,
+            nickname,
+            profile_image
+        FROM
+        tbl_customer
+        WHERE
+        customer_id = #{customerId}
+    </select>
+
+    <!-- 선호하는 지역 가져오기 -->
+    <select id="getPreferredAreas" resultType="CustomerPreferenceAreaDto">
+        SELECT
+            customer_id,
+            preferred_area
+        FROM
+            tbl_fav_area
+        WHERE
+            customer_id = #{customerId}
+    </select>
+
+    <!-- 선호하는 음식 가져오기 -->
+    <select id="getPreferredFoods" resultType="CustomerPreferenceFoodDto">
+        SELECT
+            preferred_food
+        FROM
+        tbl_fav_food
+        WHERE
+        customer_id = #{customerId}
     </select>
 
     <update id="updateCustomerInfo">
@@ -36,5 +66,7 @@
         </set>
         WHERE customer_id = #{customerId}
     </update>
+
+
 
 </mapper>

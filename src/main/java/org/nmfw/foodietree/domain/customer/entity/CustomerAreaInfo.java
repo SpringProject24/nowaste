@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class CustomerAreaInfo {
+    private int id;
     private String customerId;
     private String preferredArea;
 }
