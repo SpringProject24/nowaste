@@ -3,9 +3,7 @@ package org.nmfw.foodietree.domain.customer.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.nmfw.foodietree.domain.customer.dto.resp.CustomerMyPageDto;
-import org.nmfw.foodietree.domain.customer.dto.resp.CustomerPreferenceAreaDto;
-import org.nmfw.foodietree.domain.customer.dto.resp.CustomerPreferenceFoodDto;
-import org.nmfw.foodietree.domain.customer.entity.value.PreferredFoodCategory;
+import org.nmfw.foodietree.domain.customer.dto.resp.ReservationDetailDto;
 
 import java.util.List;
 
@@ -20,6 +18,9 @@ public interface CustomerMyPageMapper {
 
     // 회원 선호 음식 조회
     List<String> findPreferenceFoods(@Param("customerId") String customerId);
+
+    // 회원 예약 내역 조회
+    List<String> findReservations(@Param("customerId") String customerId);
 
     /**
      * 회원정보 업데이트
