@@ -40,14 +40,14 @@ class CustomerMyPageMapperTest {
         //given
         String customerId = "test@gmail.com";
         //when
-        CustomerPreferenceAreaDto preferenceAreas = customerMyPageMapper.findPreferenceAreas(customerId);
+        List<CustomerPreferenceAreaDto> preferenceAreas = customerMyPageMapper.findPreferenceAreas(customerId);
         //then
         System.out.println("preferenceAreas = " + preferenceAreas);
     }
 
 
     @Test
-    @DisplayName("선호 지역을 추출해옴")
+    @DisplayName("선호 음식을 추출해옴")
     void findPreferenceFoodTest() {
         //given
         String customerId = "test@gmail.com";

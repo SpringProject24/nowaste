@@ -2,6 +2,7 @@ package org.nmfw.foodietree.domain.customer.dto.resp;
 
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
+import org.nmfw.foodietree.domain.customer.entity.value.PreferredFoodCategory;
 
 @Getter
 @Setter
@@ -11,7 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Builder
 public class CustomerPreferenceFoodDto {
-    private Integer id;
-    private Integer customerId;
-    private Integer preferred_food;
+    private PreferredFoodCategory preferredFood;
+
+    public void setPreferredFood(String preferredFood) {
+        this.preferredFood = PreferredFoodCategory.fromKoreanName(preferredFood);
+    }
 }

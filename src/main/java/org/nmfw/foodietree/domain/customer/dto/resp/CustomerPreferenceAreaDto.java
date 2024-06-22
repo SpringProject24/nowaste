@@ -11,7 +11,5 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Builder
 public class CustomerPreferenceAreaDto {
-//    private int id;
-    private String customerId;
     private String preferredArea;
 }
