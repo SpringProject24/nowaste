@@ -40,7 +40,7 @@ class CustomerMyPageMapperTest {
         //given
         String customerId = "test@gmail.com";
         //when
-        List<CustomerPreferenceAreaDto> preferenceAreas = customerMyPageMapper.findPreferenceAreas(customerId);
+        List<String> preferenceAreas = customerMyPageMapper.findPreferenceAreas(customerId);
         //then
         System.out.println("preferenceAreas = " + preferenceAreas);
     }
@@ -52,7 +52,7 @@ class CustomerMyPageMapperTest {
         //given
         String customerId = "test@gmail.com";
         //when
-        List<CustomerPreferenceFoodDto> preferenceFoods = customerMyPageMapper.findPreferenceFoods(customerId);
+        List<String> preferenceFoods = customerMyPageMapper.findPreferenceFoods(customerId);
         //then
         System.out.println("preferenceAreas = " + preferenceFoods);
     }

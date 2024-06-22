@@ -27,7 +27,7 @@
     </select>
 
     <!-- 선호하는 지역 가져오기 -->
-    <select id="findPreferenceAreas" resultType="CustomerPreferenceAreaDto">
+    <select id="findPreferenceAreas" resultType="String">
         SELECT
             preferred_area
         FROM
@@ -37,7 +37,7 @@
     </select>
 
     <!-- 선호하는 음식 가져오기 -->
-    <select id="findPreferenceFoods" resultType="CustomerPreferenceFoodDto">
+    <select id="findPreferenceFoods" resultType="String">
         SELECT
             preferred_food
         FROM

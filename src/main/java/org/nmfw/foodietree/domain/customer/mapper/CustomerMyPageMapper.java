@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import org.nmfw.foodietree.domain.customer.dto.resp.CustomerMyPageDto;
 import org.nmfw.foodietree.domain.customer.dto.resp.CustomerPreferenceAreaDto;
 import org.nmfw.foodietree.domain.customer.dto.resp.CustomerPreferenceFoodDto;
+import org.nmfw.foodietree.domain.customer.entity.value.PreferredFoodCategory;
 
 import java.util.List;
 
@@ -15,10 +16,10 @@ public interface CustomerMyPageMapper {
     CustomerMyPageDto findOne(String customerId);
 
     // 회원 선호 지역 조회
-    CustomerPreferenceAreaDto findPreferenceAreas(@Param("customerId") String customerId);
+    List<String> findPreferenceAreas(@Param("customerId") String customerId);
 
     // 회원 선호 음식 조회
-    List<CustomerPreferenceFoodDto> findPreferenceFoods(@Param("customerId") String customerId);
+    List<String> findPreferenceFoods(@Param("customerId") String customerId);
 
     /**
      * 회원정보 업데이트
