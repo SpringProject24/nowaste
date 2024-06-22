@@ -13,11 +13,6 @@ public interface CustomerMapper {
     // 회원 정보 개별 조회
     Customer findOne(String account);
 
-    /**
-     * @param type - 어떤걸 중복검사할지 (ex: account Or emaul)
-     * @param keyword - 중복검사할 실제값
-     * @return - 중복이면 true, 아니면 false
-     */
     // 중복 확인
     boolean existsById(@Param("customerId") String customerId);
 }
