@@ -15,9 +15,9 @@ import java.time.LocalDateTime;
 @Builder
 public class CustomerIssueDetailDto {
     private String customerId;
+    private String nickname;
     private int reservationId;
     private String storeName;
-    private String nickname;
     private IssueCategory issueCategory;
     private LocalDateTime issueCompleteAt;
     private String issueText;
