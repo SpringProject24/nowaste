@@ -15,6 +15,7 @@ public class ReservationDetail {
     private String productId;
     private String reservationTime;
     private String cancelReservationAt;
+    private String pickedUpAt;
     // tbl_product
     private String storeId;
     private String pickupTime;
@@ -24,4 +25,6 @@ public class ReservationDetail {
     private String address;
     private String price;
     private String storeImg;
+    //tbl_customer
+    private String nickname;
 }
