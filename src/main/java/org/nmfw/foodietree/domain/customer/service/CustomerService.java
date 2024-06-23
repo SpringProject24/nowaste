@@ -17,6 +17,19 @@ public class CustomerService {
     private final PasswordEncoder encoder;
 
     public boolean join(SignUpDto dto) {
+        String id = dto.getNickName();
+        String password = dto.getCustomerPassword();
+
+        if(!id.matches("정규식 ~~~~~")) {
+            throw new IllegalArgumentException("아이디 형식이 틀렸습니다.");
+        }
+        if(!password.matches("정규식")) {
+            throw new IllegalArgumentException("비밀번호 형식이 틀렸습니다.");
+        }
+        if(!customerMapper.existsById(dto.getCustomerId())) {
+            throw new IllegalArgumentException("존재하지 않는 아이디입니다.");
+        }
+
         // dto를 엔터티로 변환
         Customer customer = dto.toEntity();
 
