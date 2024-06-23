@@ -172,11 +172,18 @@
         document.querySelector('.food-wrapper').classList.remove('none');
     });
 </script>
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoApiKey}"></script>
 <script>
     <!--선호하는 음식 선택-->
     const $btnFood = document.getElementById('btn-food');
     const $skipBtnFood = document.getElementById('skip-btn-food');
+
+    const container = document.getElementById('map');
+    const options = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667),
+        level: 3
+    };
+    let map;
 
     $btnFood.addEventListener('click', (e) => {
         e.preventDefault();
@@ -191,6 +198,7 @@
         }
         document.querySelector('.food-wrapper').classList.add('none');
         document.querySelector('.location-wrapper').classList.remove('none');
+        map = new kakao.maps.Map(container, options);
     });
 
     document.querySelector('.foods').addEventListener('click', (e) => {
@@ -207,18 +215,13 @@
     //     체크된 음식을 해제하기
         const $food = document.querySelectorAll('input[name=food]:checked');
         $food.forEach($f => $f.checked = false);
+        map = new kakao.maps.Map(container, options);
     });
 </script>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoApiKey}"></script>
-<script>
-    const container = document.getElementById('map');
-    const options = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 3
-    };
 
-    const map = new kakao.maps.Map(container, options);
+<script>
+
     const $btnLocation = document.getElementById('btn-location');
     const $skipBtnLocation = document.getElementById('skip-btn-location');
 
