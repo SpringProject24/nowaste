@@ -2,7 +2,9 @@ package org.nmfw.foodietree.domain.customer.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.nmfw.foodietree.domain.customer.dto.resp.CustomerIssueDetailDto;
 import org.nmfw.foodietree.domain.customer.dto.resp.CustomerMyPageDto;
+import org.nmfw.foodietree.domain.customer.entity.CustomerIssues;
 import org.nmfw.foodietree.domain.customer.entity.ReservationDetail;
 
 import java.util.List;
@@ -24,6 +26,7 @@ public interface CustomerMyPageMapper {
     // Service에서 화면에 전송할 MyPageReservationDetailDto로 변환 후 jsp로 전송
     List<ReservationDetail> findReservations(@Param("customerId") String customerId);
 
+    List<CustomerIssues> findIssues(String customerId);
     /**
      * 회원정보 업데이트
      * @param customerId : 업데이트할 회원 아이디
