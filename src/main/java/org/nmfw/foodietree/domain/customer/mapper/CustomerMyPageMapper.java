@@ -3,7 +3,6 @@ package org.nmfw.foodietree.domain.customer.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.nmfw.foodietree.domain.customer.dto.resp.CustomerMyPageDto;
-import org.nmfw.foodietree.domain.customer.dto.resp.ReservationDetailDto;
 import org.nmfw.foodietree.domain.customer.entity.ReservationDetail;
 
 import java.util.List;
