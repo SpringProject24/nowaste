@@ -2,6 +2,7 @@ package org.nmfw.foodietree.domain.customer.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.nmfw.foodietree.domain.customer.dto.resp.CustomerFavStoreDto;
 import org.nmfw.foodietree.domain.customer.dto.resp.CustomerIssueDetailDto;
 import org.nmfw.foodietree.domain.customer.dto.resp.CustomerMyPageDto;
 import org.nmfw.foodietree.domain.customer.dto.resp.MyPageReservationDetailDto;
@@ -35,6 +36,7 @@ public class CustomerMyPageService {
         CustomerMyPageDto customer = customerMyPageMapper.findOne(customerId);
         List<String> preferenceAreas = customerMyPageMapper.findPreferenceAreas(customerId);
         List<String> preferenceFoods = customerMyPageMapper.findPreferenceFoods(customerId);
+        List<CustomerFavStoreDto> favStore = customerMyPageMapper.findFavStore(customerId);
 
         // preferenceFoods String 반환 된 값들 enum(PreferredFoodCategory)으로 변경
         List<PreferredFoodCategory> preferredFoodCategories = preferenceFoods.stream()
@@ -48,6 +50,7 @@ public class CustomerMyPageService {
                 .customerPhoneNumber(customer.getCustomerPhoneNumber())
                 .preferredFood(preferredFoodCategories)
                 .preferredArea(preferenceAreas)
+                .favStore(favStore)
                 .build();
     }
 
