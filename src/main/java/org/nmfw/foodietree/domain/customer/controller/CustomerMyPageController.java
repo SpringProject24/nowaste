@@ -42,6 +42,7 @@ public class CustomerMyPageController {
         // 3. JSP파일에 조회한 데이터 보내기
         model.addAttribute("customerMyPageDto", customerMyPageDto);
         model.addAttribute("reservations", myPageReservationDetailDto);
+        model.addAttribute("issues", customerIssueDetailDto);
         return "customer-mypage-test";
     }
 }
