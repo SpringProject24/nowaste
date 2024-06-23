@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.nmfw.foodietree.domain.customer.dto.resp.CustomerMyPageDto;
 import org.nmfw.foodietree.domain.customer.dto.resp.ReservationDetailDto;
+import org.nmfw.foodietree.domain.customer.entity.ReservationDetail;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface CustomerMyPageMapper {
     List<String> findPreferenceFoods(@Param("customerId") String customerId);
 
     // 회원 예약 내역 조회
-    List<String> findReservations(@Param("customerId") String customerId);
+    List<ReservationDetail> findReservations(@Param("customerId") String customerId);
 
     /**
      * 회원정보 업데이트
