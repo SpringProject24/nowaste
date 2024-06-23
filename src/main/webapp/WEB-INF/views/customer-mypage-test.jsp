@@ -86,6 +86,15 @@
                     <li>${food}</li>
                 </c:forEach>
             </ul>
+            <h4>최애 가게</h4>
+            <ul>
+                <c:forEach var="area" items="${customerMyPageDto.favStore}">
+                    <li>
+                        <img src="${area.storeImg}" alt="최애가게이미지">
+                        <span>${area.storeName}</span>
+                    </li>
+                </c:forEach>
+            </ul>
             <h3>이슈 내역</h3>
             <div class="issue-list">
                 <c:forEach var="issue" items="${issues}">
