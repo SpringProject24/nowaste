@@ -21,7 +21,7 @@
 <section class="input-area">
     <form action="http://localhost:8083/customer/sign-up" method="post">
         <div class="container">
-            <div class="id-wrapper none">
+            <div class="id-wrapper">
                 <h2>회원 등록을 위한 이메일을 입력해주세요!</h2>
                 <input type="text" name="account" placeholder="이메일을 입력해주세요">
                 <button id="id-btn">계속</button>
@@ -39,7 +39,7 @@
                     </div>
                 </div>
             </div>
-            <div class="food-wrapper">
+            <div class="food-wrapper none">
                 <h2>선호하는 음식을 선택해주세요!</h2>
                 <p>(최대 3 종류)</p>
                 <div class="foods">
