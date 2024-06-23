@@ -109,5 +109,17 @@
         WHERE i.customer_id = #{customerId}
     </select>
 
+    <select id="findFavStore" resultType="CustomerFavStoreDto">
+        SELECT
+            fs.customer_id,
+            fs.store_id,
+            s.store_name,
+            s.store_img
+        FROM
+            tbl_fav_store fs
+        JOIN tbl_store s ON fs.store_id = s.store_id
+        WHERE
+            customer_id = #{customerId}
+    </select>
 
 </mapper>
