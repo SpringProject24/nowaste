@@ -3,6 +3,7 @@ package org.nmfw.foodietree.domain.customer.dto.resp;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.nmfw.foodietree.domain.customer.entity.value.IssueCategory;
+import org.nmfw.foodietree.domain.customer.entity.value.IssueStatus;
 
 import java.time.LocalDateTime;
 
@@ -16,8 +17,8 @@ import java.time.LocalDateTime;
 public class CustomerIssueDetailDto {
     private String customerId;
     private String nickname;
-    private int reservationId;
     private String storeName;
+    private IssueStatus issueStatus;
     private IssueCategory issueCategory;
     private LocalDateTime issueCompleteAt;
     private String issueText;
