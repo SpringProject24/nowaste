@@ -20,6 +20,8 @@ public interface CustomerMyPageMapper {
     List<String> findPreferenceFoods(@Param("customerId") String customerId);
 
     // 회원 예약 내역 조회
+    // ReservationDetail로 반환받음
+    // Service에서 화면에 전송할 MyPageReservationDetailDto로 변환 후 jsp로 전송
     List<ReservationDetail> findReservations(@Param("customerId") String customerId);
 
     /**
