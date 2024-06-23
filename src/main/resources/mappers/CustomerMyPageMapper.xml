@@ -44,7 +44,7 @@
         WHERE
             customer_id = #{customerId}
     </select>
-    
+
 <!--    회원 기본 정보 업데이트 -->
     <update id="updateCustomerInfo">
         UPDATE tbl_customer
