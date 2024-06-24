@@ -27,16 +27,12 @@ public class SignUpDto { //고객에게 받을 회원가입 정보
 
     @NotBlank
     @Size(min=5, max=15)
-    private String nickName; //닉네임
-
-    @Size(min=5, max=15)
     private String customerPhoneNumber; //전화번호
 
     public Customer toEntity() {
         return Customer.builder()
                 .customerId(this.customerId)
                 .customerPassword(this.customerPassword)
-                .nickName(this.nickName)
                 .customerPhoneNumber(this.customerPhoneNumber)
                 .build();
     }

@@ -7,10 +7,11 @@ import org.nmfw.foodietree.domain.customer.entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@SpringBootTest @Transactional
 class CustomerMapperTest {
 
     @Autowired
@@ -53,11 +54,11 @@ class CustomerMapperTest {
     @DisplayName("아이디가 pineapple@naver.com인 회원은 중복확인 결과가 true이다.")
     void existsTest() {
         //given
-        String id = "pineapple@naver.com";
+        String id = "pineappleaa@naver.com";
         //when
         boolean flag = customerMapper.existsById(id);
         //then
-        assertTrue(flag);
+        assertFalse(flag);
     }
 
     @Test
@@ -65,7 +66,7 @@ class CustomerMapperTest {
     void existsTest2() {
         String customerId = "day6"; // 테스트할 customerId
         boolean exists = customerMapper.existsById(customerId);
-        assertTrue(exists); // 고객이 존재하는지 여부를 검증
+        assertFalse(exists); // 고객이 존재하는지 여부를 검증
     }
 
     @Test

@@ -5,10 +5,11 @@ import org.junit.jupiter.api.Test;
 import org.nmfw.foodietree.domain.customer.dto.request.SignUpDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@SpringBootTest @Transactional
 class CustomerServiceTest {
 
     @Autowired
@@ -21,10 +22,10 @@ class CustomerServiceTest {
         SignUpDto dto = SignUpDto.builder()
                 .customerId("dog@naver.com")
                 .customerPassword("dog123!")
-                .nickName("오레오")
+//                .nickName("오레오")
                 .customerPhoneNumber("010-9876-5432")
                 .build();
-        //when
+        //whenGIT
         boolean flag = customerService.join(dto);
 
         //then
