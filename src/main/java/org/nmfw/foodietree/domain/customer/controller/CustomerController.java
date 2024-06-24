@@ -24,9 +24,9 @@ public class CustomerController {
 
     //로그인 양식 열기(조회)
     @GetMapping("/sign-in")
-    public void signIn() {
-        System.out.println("sign-in open test");
+    public String signIn() {
         log.info("customer/sign-in GET : forwarding to sign-in.jsp");
+        return "sign-in";
     }
 
 
@@ -38,11 +38,11 @@ public class CustomerController {
         log.info("/customer/sign-in POST");
 
         // dto가 null일 경우에 대한 예외 처리
-        if (dto == null) {
-            log.warn("CustomerLoginDto is null");
-            ra.addFlashAttribute("error", "Invalid login details");
-            return "redirect:/customer/sign-in";
-        }
+//        if (dto == null) {
+//            log.warn("CustomerLoginDto is null");
+//            ra.addFlashAttribute("error", "Invalid login details");
+//            return "redirect:/customer/sign-in";
+//        }
 
         log.debug("parameter: {}", dto);
 
