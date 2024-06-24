@@ -1,32 +1,36 @@
-<!--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>-->
-<!--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>-->
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FoodieTree</title>
-    <link rel="stylesheet" href="/static/assets/css/common.css">
-    <link rel="stylesheet" href="/static/assets/css/customer-mypage.css">
+    <link rel="stylesheet" href="/assets/css/common.css">
+    <link rel="stylesheet" href="/assets/css/customer-mypage.css">
 
 </head>
 <body>
 <header>
     <div class="container">
-        <div class="logo">FoodieTree</div>
+        <div class="logo"><h1>FoodieTree</h1></div>
         <div class="logo-img">
-            <img src="/static/assets/img/img_2.png" alt="">
+            <img src="/assets/img/img_2.png" alt="">
         </div>
     </div>
 </header>
-<section class="mypage-area">
+<section class="my-page-area">
     <div class="container">
         <div class="profile">
-            <img src="${customerMyPageDto.profileImage}" alt="Customer profile image">
-            <h3>${customerMyPageDto.nickname}</h3>
+            <a href="#" id="avatar">
+                <img src="${customerMyPageDto.profileImage ? customerMyPageDto.profileImage : '/assets/img/western.jpg'}" alt="Customer profile image">
+            </a>
+            <h2>${customerMyPageDto.nickname}</h2>
             <p>${customerMyPageDto.customerId}</p>
-            <h4>마이페이지</h4>
-            <p>개인정보수정</p>
+            <ul class="nav">
+                <li class="nav-item"><a class="nav-link" href="#">마이페이지</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">개인정보수정</a></li>
+            </ul>
         </div>
         <div class="info">
             <h3>예약 내역</h3>
@@ -82,57 +86,6 @@
     </div>
 </section>
 
-<script>
-  const $idBtn = document.getElementById('id-btn');
-  const $passBtn = document.getElementById('pass-btn');
-  const $idWrapper = document.querySelector('.id-wrapper');
-  const $passWrapper = document.querySelector('.pass-wrapper');
-  const $passCheck = document.querySelector('.pass-check');
-  const $inputId = document.querySelector('input[name=account]');
-  const $inputPw = document.querySelector('input[name=password]');
-  const $prevBtn = document.getElementById('prev-btn');
-  const $h2Id = document.querySelector('.id-wrapper h2');
 
-  $inputId.addEventListener('keyup', () => {
-  });
-
-  $idBtn.addEventListener('click', async (e) => {
-    e.preventDefault();
-    // 이메일 형식
-    const emailRegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailRegExp.test($inputId.value)) {
-      $h2Id.textContent = '이메일 형식이 올바르지 않습니다.';
-      $h2Id.style.color = 'red';
-      return;
-    }
-
-    const res = await fetch(
-        `http://localhost:8083/store/check?type=account&keyword=\${$inputId.value}`);
-    const result = await res.json();
-    if (result) {
-      $h2Id.textContent = '이미 사용중인 이메일입니다.';
-      $h2Id.style.color = 'red';
-      return;
-    }
-    $idWrapper.classList.add('none');
-    $passWrapper.style.display = 'block';
-  });
-
-  $inputPw.addEventListener('keyup', (e) => {
-    $passCheck.classList.remove('none');
-  });
-
-  $passBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    console.log($inputId.value, $inputPw.value);
-    document.querySelector('form').submit();
-  });
-
-  $prevBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    $idWrapper.classList.remove('none');
-    $passWrapper.classList.add('none');
-  });
-</script>
 </body>
 </html>
