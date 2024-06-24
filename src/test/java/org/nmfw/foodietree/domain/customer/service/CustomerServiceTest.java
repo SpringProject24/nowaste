@@ -73,6 +73,7 @@ class CustomerServiceTest {
                 .build();
         //when
         LoginResult result = customerService.authenticate(dto);
+
         //then
         assertEquals(LoginResult.SUCCESS, result);
     }

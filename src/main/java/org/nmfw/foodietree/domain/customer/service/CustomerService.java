@@ -8,10 +8,7 @@ import org.nmfw.foodietree.domain.customer.entity.Customer;
 import org.nmfw.foodietree.domain.customer.repository.CustomerMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import static org.nmfw.foodietree.domain.customer.service.LoginResult.*;
 
 @Service
@@ -38,8 +35,10 @@ public class CustomerService {
 
         //회원가입 여부 확인
         String customerId = dto.getCustomerId();
-        Customer foundCustomer = customerMapper.findOne(customerId);
+        Customer foundCustomer =
+                customerMapper.findOne(customerId);
 
+        //customer가 null일 경우
         if (foundCustomer == null) {
             log.info("{} - 회원가입이 필요합니다.", customerId);
             return NO_ID;

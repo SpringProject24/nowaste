@@ -22,14 +22,14 @@ public class SignUpDto {
 
     @NotBlank
     @Size(min=8, max=8)
-    private String customerPassword; //비밀번호(8자)
+    private String customerPassword; // 비밀번호(8자)
 
     @NotBlank
     @Size(min=5, max=10)
     private String nickName; // 닉네임(varchar(10))
 
     @Size(min=5, max=15)
-    private String customerPhoneNumber; //전화번호
+    private String customerPhoneNumber; // 전화번호
 
     public Customer toEntity() {
         return Customer.builder()
