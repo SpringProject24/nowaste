@@ -24,10 +24,10 @@ class CustomerMapperTest {
     void saveTest() {
         //given
         Customer customer = Customer.builder()
-                .customerId("candy@gmail.com")
-                .customerPassword("candy1!")
-                .nickName("캔디")
-                .customerPhoneNumber("010-2345-6789")
+                .customerId("jellyjelly@gmail.com")
+                .customerPassword("jelly1!")
+                .nickName("마이구미")
+                .customerPhoneNumber("010-7777-8888")
                 .build();
 
         //when
