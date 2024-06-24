@@ -29,12 +29,21 @@ public class CustomerController {
         log.info("customer/sign-in GET : forwarding to sign-in.jsp");
     }
 
+
     //로그인 요청 처리
     @PostMapping("/sign-in")
     public String signIn(CustomerLoginDto dto,
-                         RedirectAttributes ra,
-                         HttpServletRequest request) {
+                         RedirectAttributes ra, //리다이렉트 후에도 메시지 유지
+                         HttpServletRequest request) { //HTTP 요청 정보 담고 있는 객체(세션)
         log.info("/customer/sign-in POST");
+
+        // dto가 null일 경우에 대한 예외 처리
+        if (dto == null) {
+            log.warn("CustomerLoginDto is null");
+            ra.addFlashAttribute("error", "Invalid login details");
+            return "redirect:/customer/sign-in";
+        }
+
         log.debug("parameter: {}", dto);
 
         HttpSession session = request.getSession();
