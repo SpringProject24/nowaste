@@ -9,5 +9,4 @@ public class FoodieTreeApplication {
         SpringApplication.run(FoodieTreeApplication.class, args);
 
     }
-
 }
