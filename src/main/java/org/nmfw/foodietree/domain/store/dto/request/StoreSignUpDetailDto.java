@@ -17,7 +17,7 @@ public class StoreSignUpDetailDto {
     private String account;
 
     @NotBlank
-    private String account;
+    private String storeId;
 
     @NotBlank
     private String password;

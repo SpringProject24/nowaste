@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProductFindAllDto {
+public class ProductDto {
 
     private String storeId;
     private String productId;
