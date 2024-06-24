@@ -10,10 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 @NoArgsConstructor
 @Slf4j
 @Builder
-public class ReservationDetailDto {
+public class CustomerFavStoreDto {
     private String customerId;
-    private String customerName;
-    private String reservationTime;
-    private String cancelReservationAt;
+    private String storeId;
     private String storeName;
+    private String storeImg;
 }

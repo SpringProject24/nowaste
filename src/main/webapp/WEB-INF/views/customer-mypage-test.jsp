@@ -29,11 +29,11 @@
             height: 100px;
             border-radius: 50%;
         }
-        .reservation-list {
+        .reservation-list, .issue-list {
             border-top: 1px solid #ccc;
             padding-top: 10px;
         }
-        .reservation-item {
+        .reservation-item, .issue-item {
             display: flex;
             justify-content: space-between;
             border: 1px solid #ccc;
@@ -67,9 +67,10 @@
             <div class="reservation-list">
                 <c:forEach var="reservation" items="${reservations}">
                     <div class="reservation-item">
+                        <img src="${reservation.storeImg}" alt="Store Image"/>
                         <span>${reservation.storeName}</span>
                         <span>${reservation.status}</span>
-                        <span>${reservation.pickupTime}</span>
+                        <span>${reservation.pickUpTime}</span>
                     </div>
                 </c:forEach>
             </div>
@@ -85,6 +86,28 @@
                     <li>${food}</li>
                 </c:forEach>
             </ul>
+            <h4>최애 가게</h4>
+            <ul>
+                <c:forEach var="area" items="${customerMyPageDto.favStore}">
+                    <li>
+                        <img src="${area.storeImg}" alt="최애가게이미지">
+                        <span>${area.storeName}</span>
+                    </li>
+                </c:forEach>
+            </ul>
+            <h3>이슈 내역</h3>
+            <div class="issue-list">
+                <c:forEach var="issue" items="${issues}">
+                    <div class="issue-item">
+                        <span>${issue.issueCategory.issueName}</span>
+                        <span>${issue.issueText}</span>
+                        <span>${issue.issueStatus}</span>
+                        <span>${issue.cancelIssueAt}</span>
+                        <span>${issue.storeName}</span>
+                        <span>${issue.nickname}</span>
+                    </div>
+                </c:forEach>
+            </div>
             <div class="stats">
                 <div>10kg의 음쓰를 줄였습니다</div>
                 <div>지금까지 10만원을 아꼈어요</div>
