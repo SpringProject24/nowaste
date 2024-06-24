@@ -122,4 +122,13 @@
             customer_id = #{customerId}
     </select>
 
+    <select id="isNicknameDuplicate" resultType="boolean">
+        SELECT
+            COUNT(*)
+        FROM
+            tbl_customer
+        WHERE
+            nickname = #{nickname}
+    </select>
+
 </mapper>
