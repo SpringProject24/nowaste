@@ -17,14 +17,13 @@ public class StoreApprovalDto {
     private String storeLicenseNumber;
 
     public Store toEntity() {
-
-        Store s = new Store();
-        s.setStoreId(this.getStoreId());
-        s.setStoreName(this.getStoreName());
-        s.setAddress(this.getAddress());
-        s.setCategory(this.getCategory().getFoodType());
-        s.setBusinessNumber(this.getBusinessNumber());
-        s.setStoreLicenseNumber(this.getStoreLicenseNumber());
-        return s;
+        return Store.builder()
+                .storeId(storeId)
+                .storeName(storeName)
+                .address(address)
+                .category(category.getFoodType())
+                .businessNumber(businessNumber)
+                .storeLicenseNumber(storeLicenseNumber)
+                .build();
     }
 }
