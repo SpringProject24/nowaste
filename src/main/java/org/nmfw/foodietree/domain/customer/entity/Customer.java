@@ -8,7 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class Customer {
-
     //고객 id
     private String customerId;
     //고객 비밀번호
