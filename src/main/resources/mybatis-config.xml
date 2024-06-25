@@ -9,9 +9,12 @@
   </settings>
   <typeAliases>
     <typeAlias type="org.nmfw.foodietree.domain.store.entity.Store" alias="store"/>
+    <typeAlias type="org.nmfw.foodietree.domain.store.entity.Product" alias="storeProduct"/>
   </typeAliases>
   <mappers>
     <mapper resource="mappers/StoreMapper.xml" />
+    <mapper resource="mappers/StoreApprovalMapper.xml" />
+    <mapper resource="mappers/StoreProductMapperMapper.xml" />
       <mapper resource="mappers/LoginIdCheckMapper.xml"/>
   </mappers>
 
