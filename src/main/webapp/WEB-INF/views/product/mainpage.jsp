@@ -21,9 +21,9 @@
     </header>
     <main>
         <section class="category">
-            <h2>카테고리1</h2>
+            <h2>음식</h2>
             <div class="card-container">
-                <c:forEach var="item" items="${productList}">
+                <c:forEach var="item" items="${categoryByFood}">
                     <div class="card">
                         <div class="photo"></div>
                         <div class="info">
@@ -31,13 +31,14 @@
                             <p>픽업시간 : ${item.pickupTime}</p>
                             <p>평점 / 거리</p>
                             <p>가격 : ${item.price}</p>
+                            <p>수량 : </p>
                         </div>
                     </div>
                 </c:forEach>
             </div>
         </section>
         <section class="category">
-            <h2>카테고리2</h2>
+            <h2>지역</h2>
             <div class="card-container">
                 <div class="card">
                     <div class="photo">사진</div>
@@ -46,6 +47,7 @@
                         <p>픽업시간</p>
                         <p>평점 / 거리</p>
                         <p>가격</p>
+                        <p>수량 : </p>
                     </div>
                 </div>
                 <div class="card">

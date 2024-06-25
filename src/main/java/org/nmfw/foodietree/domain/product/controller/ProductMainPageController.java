@@ -7,6 +7,7 @@ import org.nmfw.foodietree.domain.customer.dto.resp.CustomerMyPageDto;
 import org.nmfw.foodietree.domain.customer.dto.resp.MyPageReservationDetailDto;
 import org.nmfw.foodietree.domain.customer.service.CustomerMyPageService;
 import org.nmfw.foodietree.domain.product.dto.response.ProductDto;
+import org.nmfw.foodietree.domain.product.dto.response.CategoryByFoodDto;
 import org.nmfw.foodietree.domain.product.service.ProductMainPageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,7 +51,8 @@ public class ProductMainPageController {
         List<ProductDto> productInfo = productMainPageService.getProductInfo();
         model.addAttribute("productList", productInfo);
 
-
+        List<CategoryByFoodDto> categoryByFood = productMainPageService.getCategoryByFood(customerId);
+        model.addAttribute("categoryByFood", categoryByFood);
         return "product/mainpage";
     }
 

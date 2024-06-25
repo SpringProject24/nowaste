@@ -24,7 +24,7 @@
     </select>
 
 
-    <select id="findCategory" resultType="org.nmfw.foodietree.domain.product.dto.response.ProductFindByCategoryDto">
+    <select id="categoryByFoodList" resultType="org.nmfw.foodietree.domain.product.dto.response.CategoryByFoodDto">
         SELECT
         p.product_id
         , p.store_id
@@ -36,9 +36,11 @@
         , s.price
         FROM tbl_product p
         JOIN tbl_store s
-        ON p.store_id = s.store_id;
-        where s.category = #{로그인한 유저의 세션에서 아이디로 조인 후 선호카테고리 조회}
-
+        ON p.store_id = s.store_id
+        where s.category IN
+        <foreach collection="category" item="arr" open="(" close=")" separator=",">
+            #{arr}
+        </foreach>
     </select>
 
 </mapper>

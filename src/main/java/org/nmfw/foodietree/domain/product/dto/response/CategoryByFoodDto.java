@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 
-public class ProductFindByCategoryDto {
+public class CategoryByFoodDto {
     private String storeId;
     private String productId;
     private LocalDateTime pickupTime;
