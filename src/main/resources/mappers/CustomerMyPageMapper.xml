@@ -131,4 +131,43 @@
             nickname = #{nickname}
     </select>
 
+    <insert id="addPreferenceArea">
+        INSERT INTO tbl_fav_area
+            (customer_id, preferred_area)
+        VALUES
+            (#{customerId}, #{value})
+    </insert>
+
+    <delete id="deletePreferenceArea">
+        DELETE FROM tbl_fav_area
+        WHERE customer_id = #{customerId}
+            AND preferred_area = #{target}
+    </delete>
+
+    <insert id="addPreferenceFood">
+        INSERT INTO tbl_fav_food
+            (customer_id, preferred_food)
+        VALUES
+            (#{customerId}, #{value})
+    </insert>
+
+    <delete id="deletePreferenceFood">
+        DELETE FROM tbl_fav_food
+        WHERE customer_id = #{customerId}
+                AND preferred_food = #{target}
+    </delete>
+
+    <insert id="addFavStore">
+        INSERT INTO tbl_fav_store
+            (customer_id, store_id)
+        VALUES
+            (#{customerId}, #{value})
+    </insert>
+
+    <delete id="deleteFavStore">
+        DELETE FROM tbl_fav_store
+        WHERE customer_id = #{customerId}
+                AND store_id = #{target}
+    </delete>
+
 </mapper>
