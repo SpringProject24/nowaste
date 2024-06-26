@@ -27,21 +27,21 @@
         WHERE customer_id = #{customerId}
     </select>
 
-    <!-- 아이디 중복 체크-->
     <select id="existsById" resultType="boolean">
-        SELECT COUNT(*)
-        FROM tbl_customer
-        WHERE customer_id = #{customerId}
+    SELECT COUNT(*)
+    FROM tbl_customer
+    <if test="type == 'account'">
+        WHERE customer_id = #{keyword}
+    </if>
     </select>
 
-    <!-- 선호하는 음식 가져오기 -->
-    <select id="findPreferenceFoods" resultType="String">
-        SELECT
-        preferred_food
-        FROM
-        tbl_fav_food
-        WHERE
-        customer_id = #{customerId}
-    </select>
+<!--    &lt;!&ndash; N 선호하는 음식 저장하기 &ndash;&gt;-->
+<!--    <insert id="savePreferredFoods">-->
+<!--        INSERT INTO tbl_fav_food (customer_id, preferred_food)-->
+<!--        VALUES-->
+<!--        <foreach collection="preferredFoods" item="food" separator=",">-->
+<!--            (#{customerId}, #{food})-->
+<!--        </foreach>-->
+<!--    </insert>-->
 
 </mapper>

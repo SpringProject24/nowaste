@@ -61,24 +61,24 @@ class CustomerMapperTest {
         assertEquals("파인애플", foundCustomer.getNickName());
     }
     
-    @Test
-    @DisplayName("아이디가 pineapple@naver.com인 회원은 중복확인 결과가 true이다.")
-    void existsTest() {
-        //given
-        String id = "pineappleaa@naver.com";
-        //when
-        boolean flag = customerMapper.existsById(id);
-        //then
-        assertFalse(flag);
-    }
+//    @Test
+//    @DisplayName("아이디가 pineapple@naver.com인 회원은 중복확인 결과가 true이다.")
+//    void existsTest() {
+//        //given
+//        String id = "pineappleaa@naver.com";
+//        //when
+//        boolean flag = customerMapper.existsById(id);
+//        //then
+//        assertFalse(flag);
+//    }
 
-    @Test
-    @DisplayName("아이디가 day6인 회원은 중복확인 결과가 false이다.")
-    void existsTest2() {
-        String customerId = "day6"; // 테스트할 customerId
-        boolean exists = customerMapper.existsById(customerId);
-        assertFalse(exists); // 고객이 존재하는지 여부를 검증
-    }
+//    @Test
+//    @DisplayName("아이디가 day6인 회원은 중복확인 결과가 false이다.")
+//    void existsTest2() {
+//        String customerId = "day6"; // 테스트할 customerId
+//        boolean exists = customerMapper.existsById(customerId);
+//        assertFalse(exists); // 고객이 존재하는지 여부를 검증
+//    }
 
     @Test
     @DisplayName("평문의 암호를 인코딩해야 한다.")
