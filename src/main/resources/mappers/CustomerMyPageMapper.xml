@@ -36,11 +36,13 @@
     </select>
 
     <!-- 선호하는 음식 가져오기 -->
-    <select id="findPreferenceFoods" resultType="String">
+    <select id="findPreferenceFoods" resultType="PreferredFoodDto">
         SELECT
-            preferred_food
+            f.preferred_food,
+            fc.food_image
         FROM
-            tbl_fav_food
+            tbl_fav_food f
+        JOIN tbl_food_category fc ON fc.food_name = f.preferred_food
         WHERE
             customer_id = #{customerId}
     </select>

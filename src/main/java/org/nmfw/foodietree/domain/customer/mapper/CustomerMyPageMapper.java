@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.nmfw.foodietree.domain.customer.dto.resp.CustomerFavStoreDto;
 import org.nmfw.foodietree.domain.customer.dto.resp.CustomerMyPageDto;
+import org.nmfw.foodietree.domain.customer.dto.resp.PreferredFoodDto;
 import org.nmfw.foodietree.domain.customer.entity.CustomerIssues;
 import org.nmfw.foodietree.domain.customer.entity.ReservationDetail;
 
@@ -19,7 +20,7 @@ public interface CustomerMyPageMapper {
     List<String> findPreferenceAreas(@Param("customerId") String customerId);
 
     // 회원 선호 음식 조회
-    List<String> findPreferenceFoods(@Param("customerId") String customerId);
+    List<PreferredFoodDto> findPreferenceFoods(@Param("customerId") String customerId);
 
     // customer 좋아요 표시한 가게 조회
     List<CustomerFavStoreDto> findFavStore(@Param("customerId") String customerId);
@@ -103,12 +104,22 @@ public interface CustomerMyPageMapper {
             @Param("target") String target
     );
 
-    // 예약 업데이트
+    /**
+     *
+     * @param customerId
+     */
     void updateReservation(String customerId);
 
-    // 픽업 확인
+    /**
+     *
+     * @param customerId
+     */
     void confirmPickUp(String customerId);
 
-    // 닉네임 중복 확인
+    /**
+     *
+     * @param newNickname
+     * @return
+     */
     boolean isNicknameDuplicate(String newNickname);
 }

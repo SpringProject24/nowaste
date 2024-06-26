@@ -2,6 +2,7 @@ package org.nmfw.foodietree.domain.customer.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Update;
 import org.nmfw.foodietree.domain.customer.dto.resp.CustomerIssueDetailDto;
 import org.nmfw.foodietree.domain.customer.dto.resp.CustomerMyPageDto;
@@ -48,12 +49,11 @@ public class CustomerMyPageController {
         return "customer/customer-mypage-edit-test";
     }
 
-    // 닉네임 중복 검사
     @GetMapping("/check")
     @ResponseBody
-    public ResponseEntity<?> checkNickname(String nickname){
-        customerMyPageService.checkNicknameDuplicate(nickname);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Boolean> checkNickname(@RequestParam String nickname) {
+        boolean isAvailable = customerMyPageService.checkNicknameDuplicate(nickname);
+        return ResponseEntity.ok(isAvailable);
     }
 
     @PatchMapping("/{customerId}/update")

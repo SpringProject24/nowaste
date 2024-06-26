@@ -34,20 +34,15 @@ public class CustomerMyPageService {
 
         CustomerMyPageDto customer = customerMyPageMapper.findOne(customerId);
         List<String> preferenceAreas = customerMyPageMapper.findPreferenceAreas(customerId);
-        List<String> preferenceFoods = customerMyPageMapper.findPreferenceFoods(customerId);
+        List<PreferredFoodDto> preferenceFoods = customerMyPageMapper.findPreferenceFoods(customerId);
         List<CustomerFavStoreDto> favStore = customerMyPageMapper.findFavStore(customerId);
-
-        // preferenceFoods String 반환 된 값들 enum(PreferredFoodCategory)으로 변경
-        List<PreferredFoodCategory> preferredFoodCategories = preferenceFoods.stream()
-                .map(PreferredFoodCategory::fromKoreanName)
-                .collect(Collectors.toList());
 
         return CustomerMyPageDto.builder()
                 .customerId(customer.getCustomerId())
                 .nickname(customer.getNickname())
                 .profileImage(customer.getProfileImage())
                 .customerPhoneNumber(customer.getCustomerPhoneNumber())
-                .preferredFood(preferredFoodCategories)
+                .preferredFood(preferenceFoods)
                 .preferredArea(preferenceAreas)
                 .favStore(favStore)
                 .build();
