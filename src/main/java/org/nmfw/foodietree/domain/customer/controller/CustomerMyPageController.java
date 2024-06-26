@@ -49,12 +49,6 @@ public class CustomerMyPageController {
         return "customer/customer-mypage-edit-test";
     }
 
-    @GetMapping("/check")
-    @ResponseBody
-    public ResponseEntity<Boolean> checkNickname(@RequestParam String nickname) {
-        boolean isAvailable = customerMyPageService.checkNicknameDuplicate(nickname);
-        return ResponseEntity.ok(isAvailable);
-    }
 
     @PatchMapping("/{customerId}/update")
     public ResponseEntity<?> updateCustomerInfo(@PathVariable String customerId, @RequestBody List<UpdateDto> updates) {
