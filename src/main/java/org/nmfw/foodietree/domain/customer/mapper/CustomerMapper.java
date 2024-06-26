@@ -4,6 +4,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.nmfw.foodietree.domain.customer.entity.Customer;
 
+import java.util.List;
+
 @Mapper
 public interface CustomerMapper {
 
@@ -11,7 +13,6 @@ public interface CustomerMapper {
     boolean save(Customer customer);
 
     // 회원 정보 개별 조회
-    // 아이디 중복확인이 아니라 계정여부를 비교하는 객체가 필요하지 않을까?
     Customer findOne(String customer);
 
     /**
@@ -20,4 +21,5 @@ public interface CustomerMapper {
      */
     // 중복 확인
     boolean existsById(@Param("customerId") String customerId);
+
 }

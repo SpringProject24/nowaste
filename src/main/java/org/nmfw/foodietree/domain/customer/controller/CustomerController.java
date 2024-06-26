@@ -2,8 +2,8 @@ package org.nmfw.foodietree.domain.customer.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.nmfw.foodietree.domain.customer.dto.request.SignUpDto;
 import org.nmfw.foodietree.domain.customer.dto.request.CustomerLoginDto;
+import org.nmfw.foodietree.domain.customer.dto.request.SignUpDto;
 import org.nmfw.foodietree.domain.customer.service.CustomerService;
 import org.nmfw.foodietree.domain.customer.service.LoginResult;
 import org.springframework.stereotype.Controller;
@@ -23,12 +23,11 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
-
     //회원가입 양식 열기
     @GetMapping("/sign-up")
-    public void signUp() {
+    public String signUp() {
         log.info("customer/sign-up GET : forwarding to sign-up.jsp");
-        //return "customer/sign-up";
+        return "/customer/sign-up";
     }
 
     //회원가입 요청 처리
@@ -39,18 +38,16 @@ public class CustomerController {
 
         boolean flag = customerService.join(dto);
 
-        return flag ? "redirect:" : "redirect:/customers/sign-up";
+        return flag ? "redirect:/product/mainpage" : "redirect:/customer/sign-up";
         //회원가입 성공시 가게 주소 입력하는 소비자 메인창으로 이동
-        //
+
     }
-
-
 
     //로그인 양식 열기(조회)
     @GetMapping("/sign-in")
     public String signIn() {
         log.info("customer/sign-in GET : forwarding to sign-in.jsp");
-		return "customer/sign-in";
+        return "sign-in";
     }
 
 
@@ -83,4 +80,6 @@ public class CustomerController {
         //로그인 실패시 다시 로그인 페이지 랜더링
         return "redirect:/customer/sign-in";
     }
+
+
 }

@@ -16,6 +16,7 @@ import java.util.List;
 @Controller
 @Slf4j
 public class CommonController {
+
     @Value("${env.kakao.api.key:default}")
     private String kakaoApiKey;
 
@@ -24,13 +25,13 @@ public class CommonController {
         return "sign-in";
     }
 
-    @GetMapping("/customer/sign-up")
+    @GetMapping("/common/sign-up")
     public String signUp(Model model) {
         model.addAttribute("kakaoApiKey", kakaoApiKey);
-        return "customer/sign-up";
+        return "common/sign-up";
     }
 
-    @PostMapping("/customer/sign-up")
+    @PostMapping("/common/sign-up")
     @CrossOrigin
     public String signUp(SignUpDto signUpDto) {
         log.info("signUpDto: {}", signUpDto);

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.nmfw.foodietree.domain.customer.entity.Customer;
 import org.nmfw.foodietree.domain.customer.mapper.CustomerMapper;
+import org.nmfw.foodietree.domain.customer.mapper.CustomerMyPageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,6 +20,16 @@ class CustomerMapperTest {
 
     @Autowired
     PasswordEncoder encoder;
+
+    @Test
+    @DisplayName("선호하는 음식을 최대 3개 선택해야한다.")
+    void selectFoodTest() {
+        //given
+
+        //when
+
+        //then
+    }
 
     @Test
     @DisplayName("회원가입에 성공해야 한다")

@@ -24,6 +24,8 @@ public class CustomerService {
     //비밀번호 암호화 객체
     private final PasswordEncoder encoder;
 
+
+
     public boolean join(SignUpDto dto) {
         String id = dto.getCustomerId();
         String password = dto.getCustomerPassword();
@@ -38,7 +40,6 @@ public class CustomerService {
             throw new IllegalArgumentException("비밀번호 형식이 틀렸습니다.");
         }
 
-        // ??????계정인지 아이디인지 구분 필요할 듯함.
         if(!customerMapper.existsById(dto.getCustomerId())) {
             throw new IllegalArgumentException("존재하지 않는 아이디입니다.");
         }
@@ -52,6 +53,7 @@ public class CustomerService {
 
         return customerMapper.save(customer);
     }
+
 
 	//로그인 검증 처리
 	public LoginResult authenticate(CustomerLoginDto dto, HttpSession session) {

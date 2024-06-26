@@ -34,6 +34,14 @@
         WHERE customer_id = #{customerId}
     </select>
 
-
+    <!-- 선호하는 음식 가져오기 -->
+    <select id="findPreferenceFoods" resultType="String">
+        SELECT
+        preferred_food
+        FROM
+        tbl_fav_food
+        WHERE
+        customer_id = #{customerId}
+    </select>
 
 </mapper>
