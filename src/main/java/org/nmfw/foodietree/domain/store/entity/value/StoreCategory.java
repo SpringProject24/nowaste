@@ -18,8 +18,4 @@ public enum StoreCategory {
     ELSE("기타");
 
     private final String foodType;
-
-    public String getFoodType(){
-        return foodType;
-    }
 }
