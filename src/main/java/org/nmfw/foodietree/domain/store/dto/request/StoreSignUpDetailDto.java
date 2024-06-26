@@ -14,7 +14,6 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @Builder
 public class StoreSignUpDetailDto {
-    private String account;
 
     @NotBlank
     private String account;
