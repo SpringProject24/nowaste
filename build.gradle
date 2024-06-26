@@ -51,6 +51,9 @@ dependencies {
 
     // 메일서버와 연결해서 메일을 발송
     implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+    // 타임리프
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 }
 
 tasks.named('test') {

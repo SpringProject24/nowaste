@@ -13,10 +13,10 @@ public class EmailController {
     private EmailService emailService;
 
     @GetMapping("/send-email")
-    public String sendHtmlEmail(@RequestParam String to, @RequestParam String subject, @RequestParam String htmlBody) {
+    public String sendHtmlEmail(@RequestParam String to, @RequestParam String code) {
         try {
-            emailService.sendHtmlMessage(to, subject, htmlBody);
-            return "HTML Email sent successfully";
+            emailService.sendHtmlMessage(to, code);
+            return "Password reset email sent successfully";
         } catch (MessagingException e) {
             return "Failed to send HTML email: " + e.getMessage();
         }
