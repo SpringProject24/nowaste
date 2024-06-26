@@ -58,6 +58,7 @@ public class CustomerMyPageController {
 
     @PatchMapping("/{customerId}/update")
     public ResponseEntity<?> updateCustomerInfo(@PathVariable String customerId, @RequestBody List<UpdateDto> updates) {
+
         boolean flag = customerMyPageService.updateCustomerInfo(customerId, updates);
         return flag? ResponseEntity.ok("Update successful"): ResponseEntity.status(400).body("Update fail");
     }

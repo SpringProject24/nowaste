@@ -125,15 +125,15 @@ public class CustomerMyPageService {
                 customerMyPageMapper.addPreferenceFood(customerId, value);
                 return true;
             }
-            if("preferredArea".equals(type)) {
+            else if("preferredArea".equals(type)) {
                 customerMyPageMapper.addPreferenceArea(customerId, value);
                 return true;
             }
-            if("favStore".equals(type)) {
+            else if("favStore".equals(type)) {
                 customerMyPageMapper.addFavStore(customerId, value);
                 return true;
             }
-            if("customerInfo".equals(type)) {
+            else{
                 customerMyPageMapper.updateCustomerInfo(customerId, type, value);
                 return true;
             }

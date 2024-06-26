@@ -14,5 +14,5 @@ import org.nmfw.foodietree.domain.customer.entity.value.PreferredFoodCategory;
 public class PreferredFoodDto {
 //    private PreferredFoodCategory foodCategoryName;
     private String foodImage;
-    private String foodKoreanName;
+    private String preferredFood;
 }

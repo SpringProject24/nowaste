@@ -62,9 +62,16 @@
         <div class="profile">
             <img src="${customerMyPageDto.profileImage}" alt="Customer profile image">
             <p class="edit-btn" onclick="editField('profileImage')">✏️</p>
-            <h3 id="nickname" contenteditable="true" oninput="debounceCheckNickname()">${customerMyPageDto.nickname}</h3>
-            <p class="edit-btn" onclick="editField('nickname')">✏️</p>
+            <label for="nickname"></label>
+            <input id="nickname" placeholder="${customerMyPageDto.nickname}"></input>
+            <span class="edit-submit-btn" onclick="fetchUpdates('nickname', document.getElementById('nickname').value)">️✅</span>
+            <p class="edit-btn">✏️</p>
             <p>${customerMyPageDto.customerId}</p>
+            <label for="customerPhoneNumber"></label>
+            <input id="customerPhoneNumber" placeholder="${customerMyPageDto.customerPhoneNumber}"></input>
+            <span class="edit-submit-btn" onclick="fetchUpdates('customer_phone_number', document.getElementById('customerPhoneNumber').value)">️✅</span>
+            <p class="edit-btn">✏️</p>
+            <button id="reset-pw-btn">비밀번호 재설정</button>
             <h4>마이페이지</h4>
             <p id="nickname-status"></p> <!-- Status message for nickname validation -->
         </div>
@@ -78,12 +85,11 @@
             <h4>선호 음식</h4>
             <ul id="preferredFood">
                 <c:forEach var="food" items="${customerMyPageDto.preferredFood}">
-                    <li onclick="deleteItem('preferredFood', '${food.foodKoreanName}')">
+                    <li onclick="deleteItem('preferredFood', '${food.preferredFood}')">
                         <img src="${food.foodImage}" alt="선호음식이미지">
-                        <span>${food.foodKoreanName}</span>
+                        <span>${food.preferredFood}</span>
                         <span class="delete-btn">️❌</span>
                     </li>
-<%--                    <li onclick="deleteItem('preferredFood', '${food}')">${food} <span class="delete-btn">❌</span></li>--%>
                 </c:forEach>
             </ul>
             <h4>최애 가게</h4>
@@ -105,7 +111,7 @@
 </form>
 
 <script>
-    const BASE_URL = 'https://localhost:8083/customer';
+    const BASE_URL = 'http://localhost:8083/customer';
     const customerId = 'test@gmail.com'; // Replace this with the actual customer ID
 
     let type;
@@ -114,32 +120,20 @@
         type = fieldId;
     }
 
-    document.addEventListener('keyup', async function (event) {
-        if (event.key === 'Enter' || type) {
-            event.preventDefault();
-            await fetchUpdates();
-        }
-    });
-
-    async function fetchUpdates() {
-
-        const customerId = 'test@gmail.com'; // Replace this with the actual customer ID
-        const elements = document.querySelectorAll('[contenteditable="true"]');
-
-        const updates = Array.from(elements).map(el => ({
-            type: el.parentElement.id,
-            value: el.innerText
-        }));
-
-        console.log('Updates to be sent:', updates); // Debugging line
+    async function fetchUpdates(type, value) {
+        const payload = {
+            type: type,
+            value: value
+        };
+        console.log('Updates to be sent:', payload); // Debugging line
 
         try {
-            const response = await fetch(`${BASE_URL}/${customerId}/update`, {
+            const response = await fetch(`\${BASE_URL}/\${customerId}/update`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(updates)
+                body: JSON.stringify([payload])
             });
 
             if (response.ok) {
@@ -153,44 +147,6 @@
         }
     }
 
-    // Debounce function to delay the nickname check
-    function debounce(func, wait) {
-        let timeout;
-        return function (...args) {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(this, args), wait);
-        };
-    }
-
-    const checkNickname = async () => {
-        const nicknameElement = document.getElementById('nickname');
-        const nickname = nicknameElement.innerText;
-        const statusElement = document.getElementById('nickname-status');
-
-        try {
-            const response = await fetch(`${BASE_URL}/check?nickname=${nickname}`);
-            if (response.ok) {
-                const result = await response.json();
-                if (result) {
-                    statusElement.innerText = "사용 가능한 닉네임입니다.";
-                    statusElement.style.color = "green";
-                } else {
-                    statusElement.innerText = "이미 사용 중인 닉네임입니다.";
-                    statusElement.style.color = "red";
-                }
-            } else {
-                statusElement.innerText = "닉네임 확인 실패.";
-                statusElement.style.color = "red";
-            }
-        } catch (error) {
-            statusElement.innerText = "서버 오류.";
-            statusElement.style.color = "red";
-            console.error('Error checking nickname:', error);
-        }
-    };
-
-    const debounceCheckNickname = debounce(checkNickname, 1000);
-
     async function deleteItem(type, value) {
 
         const payload = {
@@ -199,7 +155,7 @@
         };
 
         try {
-            const response = await fetch(`${BASE_URL}/${customerId}/delete`, {
+            const response = await fetch(`\${BASE_URL}/\${customerId}/delete`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -210,7 +166,7 @@
             if (response.ok) {
                 console.log('Delete successful');
                 // Remove the item from the DOM
-                const listItem = document.querySelector(`[onclick="deleteItem('${type}', '${value}')"]`);
+                const listItem = document.querySelector(`[onclick="deleteItem('\${type}', '\${value}')"]`);
                 if (listItem) listItem.remove();
             } else {
                 const errorText = await response.text();
@@ -220,7 +176,17 @@
             console.error('Error deleting item:', error);
         }
     }
-
+    function handleKeyUp(event, fieldId) {
+            event.preventDefault();
+        if (event.key === 'Enter') {
+            const element = event.target;
+            const value = element.innerText;
+            console.log(element);
+            console.log(value);
+            element.blur(); // Remove focus to trigger the update
+            fetchUpdates(fieldId, value);
+        }
+    }
 </script>
 </body>
 </html>
