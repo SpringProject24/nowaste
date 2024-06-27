@@ -60,10 +60,42 @@
             cursor: pointer;
             color: red;
         }
+
+        .modal {
+            display: none; /* 모달을 기본적으로 숨깁니다. */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-<form action="/customer/mypage-main" id="customer-mypage-main" method="post">
+<form action="/customer/mypage" id="customer-mypage-main" method="post">
     <div class="container">
         <div class="profile">
             <img src="${customerMyPageDto.profileImage}" alt="Customer profile image">
@@ -78,7 +110,9 @@
             <span class="edit-submit-btn" onclick="fetchUpdates('customer_phone_number', document.getElementById('customerPhoneNumber').value)">️✅</span>
             <p class="edit-btn">✏️</p>
             <button id="reset-pw-btn">비밀번호 재설정</button>
-            <h4>마이페이지</h4>
+            <a href="/customer/mypage">
+                <h4>마이페이지</h4>
+            </a>
             <p id="nickname-status"></p> <!-- Status message for nickname validation -->
         </div>
         <div class="info">
@@ -118,19 +152,29 @@
 <!-- 비밀번호 재설정 모달 -->
 <div id="resetPasswordModal" class="modal">
     <div class="modal-content">
-        <span class="close">&times;</span> <!-- X 버튼 추가 -->
+        <span class="close" onclick="closeModal()">&times;</span> <!-- X 버튼 추가 -->
         <h2>비밀번호 재설정</h2>
-        <p>인증번호를 받으세요.</p>
-        <button id="sendVerificationCodeBtn" onclick="sendVerificationCode()">인증번호 받기</button>
+        <div id="emailStep">
+            <p>인증번호를 받으세요.</p>
+            <button id="sendVerificationCodeBtn" onclick="sendVerificationCode()">인증번호 받기</button>
+        </div>
+        <div id="codeStep" class="hidden">
+            <p>인증번호를 입력하세요.</p>
+            <input type="text" id="verificationCode" maxlength="6">
+            <button onclick="verifyCode()">인증하기</button>
+            <div id="verificationResult"></div>
+        </div>
         <div id="countdown"></div>
     </div>
 </div>
+
 
 <script>
     const BASE_URL = 'http://localhost:8083/customer';
     const customerId = 'sji4205@naver.com'; // Replace this with the actual customer ID
 
     let type;
+    let countdownInterval;
 
     function editField(fieldId) {
         type = fieldId;
@@ -206,7 +250,8 @@
 
 
     // 비밀번호 재설정 모달 관련 함수
-    function openModal() {
+    function openModal(e) {
+        e.preventDefault();
         document.getElementById('resetPasswordModal').style.display = 'block';
     }
 
@@ -230,19 +275,21 @@
         };
     });
 
+
     async function sendVerificationCode() {
         try {
-            const response = await fetch('/sendVerificationCode', {
+            const response = await fetch(`http://localhost:8083/email/sendVerificationCode`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ email: '${customerMyPageDto.customerId}' }) // Replace with actual email
+                body: JSON.stringify({ email: customerId }) // Replace with actual email
             });
 
             if (response.ok) {
-                openModal(); // 모달 열기
                 startCountdown(300); // 5분(300초) 카운트다운 시작
+                document.getElementById('emailStep').classList.add('hidden');
+                document.getElementById('codeStep').classList.remove('hidden');
             } else {
                 console.error('Failed to send verification code');
             }
@@ -251,21 +298,49 @@
         }
     }
 
+    async function verifyCode() {
+        const code = document.getElementById('verificationCode').value;
+        try {
+            const response = await fetch('http://localhost:8083/email/verifyCode', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: customerId, code: code }) // Replace with actual email and code
+            });
+
+            if (response.ok) {
+                const result = await response.text();
+                document.getElementById('verificationResult').textContent = result;
+                clearInterval(countdownInterval); // 인증 성공 시 타이머 멈춤
+            } else {
+                console.error('Verification failed');
+                document.getElementById('verificationResult').textContent = '실패';
+            }
+        } catch (error) {
+            console.error('Error verifying code:', error);
+            document.getElementById('verificationResult').innerText = '실패';
+        }
+    }
+
     function startCountdown(seconds) {
         const countdownElement = document.getElementById('countdown');
-        countdownElement.textContent = `남은 시간: ${seconds}초`;
+        countdownElement.textContent = `남은 시간: \${seconds}초`;
 
-        const interval = setInterval(() => {
+        countdownInterval = setInterval(() => {
             seconds -= 1;
-            countdownElement.textContent = `남은 시간: ${seconds}초`;
+            countdownElement.textContent = `남은 시간: \${seconds}초`;
 
             if (seconds <= 0) {
-                clearInterval(interval);
+                clearInterval(countdownInterval);
                 countdownElement.textContent = '시간 초과';
                 closeModal(); // 모달 닫기
             }
         }, 1000);
     }
+
+    const $btn = document.getElementById('reset-pw-btn');
+    $btn.addEventListener('click', openModal);
 </script>
 </body>
 </html>
