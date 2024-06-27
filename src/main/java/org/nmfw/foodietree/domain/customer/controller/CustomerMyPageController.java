@@ -35,7 +35,7 @@ public class CustomerMyPageController {
         log.info("/customer/mypage-main POST");
 
         // 1. 로그인 되어있는 회원 아이디 가져오기
-        String customerId = "test@gmail.com";
+        String customerId = "sji4205@naver.com";
         // 2. 데이터베이스에서 해당 회원 데이터 조회하기
         CustomerMyPageDto customerMyPageDto = customerMyPageService.getCustomerInfo(customerId, request, response);
 
