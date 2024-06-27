@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CategotyByAreaDto {
+public class CategoryByAreaDto {
     private String storeId;
     private String productId;
     private LocalDateTime pickupTime;

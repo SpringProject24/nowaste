@@ -2,7 +2,9 @@ package org.nmfw.foodietree.domain.product.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.nmfw.foodietree.domain.customer.dto.resp.PreferredFoodDto;
 import org.nmfw.foodietree.domain.customer.mapper.CustomerMyPageMapper;
+import org.nmfw.foodietree.domain.product.dto.response.CategoryByAreaDto;
 import org.nmfw.foodietree.domain.product.dto.response.ProductDto;
 import org.nmfw.foodietree.domain.product.dto.response.CategoryByFoodDto;
 import org.nmfw.foodietree.domain.product.mapper.ProductMainPageMapper;
@@ -23,13 +25,21 @@ public class ProductMainPageService {
     }
 
     public List<CategoryByFoodDto> getCategoryByFood(String customerId) {
-        List<String> preferenceFoods = customerMyPageMapper.findPreferenceFoods(customerId);
+        List<PreferredFoodDto> preferenceFoods = customerMyPageMapper.findPreferenceFoods(customerId);
         preferenceFoods.forEach(e-> log.info("{}", e));
         if (preferenceFoods.isEmpty()) {
             log.info("null");
             return null;
         }
         return productMainPageMapper.categoryByFoodList(preferenceFoods);
+    }
+
+    public List<CategoryByAreaDto> getCategoryByArea(String customerId) {
+        List<String> preferenceAreas = customerMyPageMapper.findPreferenceAreas(customerId);
+        if (preferenceAreas.isEmpty()) {
+            return null;
+        }
+        return productMainPageMapper.categoryByAreaList(preferenceAreas);
     }
 
 }

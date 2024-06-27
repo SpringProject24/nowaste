@@ -43,7 +43,7 @@
         </foreach>
     </select>
 
-    <select id="categoryByAreaList" resultType="org.nmfw.foodietree.domain.product.dto.response.CategotyByAreaDto">
+    <select id="categoryByAreaList" resultType="org.nmfw.foodietree.domain.product.dto.response.CategoryByAreaDto">
         SELECT
         p.product_id
         , p.store_id
@@ -62,6 +62,14 @@
             #{arr}
         </foreach>
     </select>
+
+    SELECT
+    SUBSTRING_INDEX(address,' ', 3)
+    AS simplified_address
+    FROM tbl_store;
+
+
+<!--서울시 마포구 대현동 111-111-->
 
 
 </mapper>
