@@ -8,4 +8,5 @@ public class FoodieTreeApplication {
     public static void main(String[] args) {
         SpringApplication.run(FoodieTreeApplication.class, args);
     }
+
 }
