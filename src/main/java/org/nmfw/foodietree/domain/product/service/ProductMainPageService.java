@@ -25,6 +25,10 @@ public class ProductMainPageService {
     public List<CategoryByFoodDto> getCategoryByFood(String customerId) {
         List<String> preferenceFoods = customerMyPageMapper.findPreferenceFoods(customerId);
         preferenceFoods.forEach(e-> log.info("{}", e));
+        if (preferenceFoods.isEmpty()) {
+            log.info("null");
+            return null;
+        }
         return productMainPageMapper.categoryByFoodList(preferenceFoods);
     }
 

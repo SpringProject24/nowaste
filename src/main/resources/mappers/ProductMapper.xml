@@ -43,4 +43,25 @@
         </foreach>
     </select>
 
+    <select id="categoryByAreaList" resultType="org.nmfw.foodietree.domain.product.dto.response.CategotyByAreaDto">
+        SELECT
+        p.product_id
+        , p.store_id
+        , p.pickup_time
+        , p.product_upload_date
+        , s.store_img
+        , s.store_name
+        , s.category
+        , s.price
+        , s.address
+        FROM tbl_product p
+        JOIN tbl_store s
+        ON p.store_id = s.store_id
+        where s.category IN
+        <foreach collection="category" item="arr" open="(" close=")" separator=",">
+            #{arr}
+        </foreach>
+    </select>
+
+
 </mapper>
