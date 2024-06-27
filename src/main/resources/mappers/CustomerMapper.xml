@@ -22,7 +22,6 @@
     </select>
 
 
-
     <!--  고객 1명의 정보를 조회 -->
     <select id="findOne" resultType="customer">
         SELECT

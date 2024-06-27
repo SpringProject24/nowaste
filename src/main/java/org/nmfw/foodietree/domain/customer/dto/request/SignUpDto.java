@@ -19,7 +19,7 @@ public class SignUpDto { //고객에게 받을 회원가입 정보
     @NotBlank(message = "아이디를 입력해주세요")
     @Size(min = 5, max = 50, message = "아이디는 5자에서 50자 사이")
     @Email(message = "유효한 이메일 주소를 입력해주세요")
-//    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "아이디는 영문과 숫자만 포함 가능.")
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "아이디는 영문과 숫자만 포함 가능.")
     private String customerId; // 아이디
 
     @NotBlank(message = "비밀번호를 입력해주세요")
@@ -34,6 +34,7 @@ public class SignUpDto { //고객에게 받을 회원가입 정보
 //    private String customerPhoneNumber; //전화번호
 
 
+    //customer 객체 생성 및 반환
     public Customer toEntity() {
         return Customer.builder()
                 .customerId(this.customerId)

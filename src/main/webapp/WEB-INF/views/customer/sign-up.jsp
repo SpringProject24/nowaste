@@ -137,7 +137,7 @@
 
         const res = await fetch(
             // `http://localhost:8083/customer/check?type=$account&keyword=\${$inputId.value}`);
-            `http://localhost:8083/customer/check?type=account&keyword=${$inputId.value}`);
+            `http://localhost:8083/customer/check?type=account&keyword=\${$inputId.value}`);
 
         const result = await res.json();
         if (result) {
@@ -157,11 +157,15 @@
 
     $passBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        const password = $inputPw.value;
-        const passwordChk = $inputPwChk.value;
+        // const password = $inputPw.value;
+        // const passwordChk = $inputPwChk.value;
 
-        // const $password = document.getElementById('input[id=password]').value;
-        // const $passwordChk = document.getElementById('input[id=password-chk]').value;
+        const $password = document.getElementById('input[id=password]').value;
+        const $passwordChk = document.getElementById('input[id=password-chk]').value;
+        
+        // const $password = document.getElementById('password').value;
+        // const $passwordChk = document.getElementById('password-chk').value;
+
         if ($password !== $passwordChk) {
             alert('비밀번호가 일치하지 않습니다.');
             return;

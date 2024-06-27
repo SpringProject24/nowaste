@@ -23,7 +23,7 @@ class CustomerServiceTest {
         SignUpDto dto = SignUpDto.builder()
                 .customerId("dog@naver.com")
                 .customerPassword("dog123!")
-//                .nickName("오레오")
+                .nickName("오레오")
 //                .customerPhoneNumber("010-9876-5432")
                 .build();
         //when
@@ -39,7 +39,6 @@ class CustomerServiceTest {
         //given
         CustomerLoginDto dto = CustomerLoginDto.builder()
                 .customerId("donut")
-                .customerPassword("602602")
                 .build();
         //when
         LoginResult result = customerService.authenticate(dto);
@@ -69,7 +68,7 @@ class CustomerServiceTest {
     void successTest() {
         //given
         CustomerLoginDto dto = CustomerLoginDto.builder()
-                .customerId("pet@naver.com")
+                .customerId("dog@naver.com")
                 .customerPassword("dog123!")
                 .build();
         //when
