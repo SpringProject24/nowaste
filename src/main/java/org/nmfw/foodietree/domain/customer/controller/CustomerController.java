@@ -46,12 +46,12 @@ public class CustomerController {
         //회원가입 성공시 가게 주소 입력하는 소비자 메인창으로 이동
 
     }
-    // 아이디(이메일) 중복 검사 비동기 요청 처리
+    // 아이디(이메일) 중복 검사
     @GetMapping("/check")
     @ResponseBody
-    public ResponseEntity<?> check(String type, String keyword) {
-        boolean flag = customerService.checkIdentifier(type, keyword);
-        log.debug("{} 중복체크 결과? {}", type, flag);
+    public ResponseEntity<?> check(String keyword) {
+        boolean flag = customerService.checkIdentifier(keyword);
+        log.debug("중복체크 결과? {}", flag);
         return ResponseEntity
                 .ok()
                 .body(flag);

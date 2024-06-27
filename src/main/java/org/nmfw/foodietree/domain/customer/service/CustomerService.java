@@ -30,6 +30,7 @@ public class CustomerService {
 
 		// dto를 엔터티로 변환
 		Customer customer = dto.toEntity();
+
 		// 비밀번호를 인코딩(암호화)
 		String encodedPassword = encoder.encode(dto.getCustomerPassword());
 		customer.setCustomerPassword(encodedPassword);
@@ -72,7 +73,7 @@ public class CustomerService {
 
 	//로그인 검증 처리
 //	public LoginResult authenticate(CustomerLoginDto dto, HttpSession session)
-	public LoginResult authenticate(CustomerLoginDto dto){
+	public LoginResult authenticate(CustomerLoginDto dto) {
 
 		//회원가입 여부 확인
 		String customerId = dto.getCustomerId();
@@ -111,8 +112,8 @@ public class CustomerService {
 
 	//아이디(이메일) 중복 검사
 	// 아이디, 이메일 중복검사
-	public boolean checkIdentifier(String type, String keyword) {
-		return customerMapper.existsById(type, keyword);
+	public boolean checkIdentifier(String keyword) {
+		return customerMapper.existsById(keyword);
 	}
 }
 
