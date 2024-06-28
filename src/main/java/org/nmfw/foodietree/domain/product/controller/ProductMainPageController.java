@@ -6,6 +6,7 @@ import org.nmfw.foodietree.domain.customer.dto.resp.CustomerIssueDetailDto;
 import org.nmfw.foodietree.domain.customer.dto.resp.CustomerMyPageDto;
 import org.nmfw.foodietree.domain.customer.dto.resp.MyPageReservationDetailDto;
 import org.nmfw.foodietree.domain.customer.service.CustomerMyPageService;
+import org.nmfw.foodietree.domain.product.dto.response.CategoryByAreaDto;
 import org.nmfw.foodietree.domain.product.dto.response.ProductDto;
 import org.nmfw.foodietree.domain.product.dto.response.CategoryByFoodDto;
 import org.nmfw.foodietree.domain.product.service.ProductMainPageService;
@@ -53,6 +54,11 @@ public class ProductMainPageController {
 
         List<CategoryByFoodDto> categoryByFood = productMainPageService.getCategoryByFood(customerId);
         model.addAttribute("categoryByFood", categoryByFood);
+
+        List<CategoryByAreaDto> categoryByArea = productMainPageService.getCategoryByArea(customerId);
+        model.addAttribute("categoryByArea" ,categoryByArea);
+
+
         return "product/mainpage";
     }
 

@@ -40,16 +40,18 @@
         <section class="category">
             <h2>지역</h2>
             <div class="card-container">
-                <div class="card">
-                    <div class="photo">사진</div>
-                    <div class="info">
-                        <p>매장이름</p>
-                        <p>픽업시간</p>
-                        <p>평점 / 거리</p>
-                        <p>가격</p>
-                        <p>수량 : </p>
+                <c:forEach var="item" items="${categoryByArea}">
+                    <div class="card">
+                        <div class="photo"></div>
+                        <div class="info">
+                            <p>가게이름 : ${item.storeName}</p>
+                            <p>픽업시간 : ${item.pickupTime}</p>
+                            <p>평점 / 거리</p>
+                            <p>가격 : ${item.price}</p>
+                            <p>수량 : </p>
+                        </div>
                     </div>
-                </div>
+                </c:forEach>
                 <div class="card">
                     <div class="photo">사진</div>
                     <div class="info">
