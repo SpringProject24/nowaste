@@ -55,7 +55,7 @@ public class ProductMainPageController {
         List<CategoryByFoodDto> categoryByFood = productMainPageService.getCategoryByFood(customerId);
         model.addAttribute("categoryByFood", categoryByFood);
 
-        List<CategoryByAreaDto> categoryByArea = productMainPageService.getCategoryByArea(customerId);
+        List<String> categoryByArea = productMainPageService.getCategoryByArea(customerId);
         model.addAttribute("categoryByArea" ,categoryByArea);
 
 

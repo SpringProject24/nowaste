@@ -38,7 +38,7 @@
         ON p.store_id = s.store_id -- 두 테이블을 가게 ID로 조인
         WHERE s.category IN
         <foreach collection="category" item="arr" open="(" close=")" separator=",">
-            #{arr,jdbcType=VARCHAR} -- 카테고리 리스트를 IN 절에 포함시킴
+            #{arr.preferredFood} -- 카테고리 리스트를 IN 절에 포함시킴
         </foreach>
     </select>
 
@@ -68,7 +68,8 @@
         preferred_area AS pre_area
         FROM
         tbl_fav_area ) f
-        ON s.simplified_address = f.pre_area );
+        ON s.simplified_address = f.pre_area )
+
     </select>
 
 

@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
 public class CategoryByFoodDto {
     private String storeId;
     private String productId;
