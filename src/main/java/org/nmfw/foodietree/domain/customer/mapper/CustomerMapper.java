@@ -2,6 +2,7 @@ package org.nmfw.foodietree.domain.customer.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.nmfw.foodietree.domain.customer.dto.request.SignUpDto;
 import org.nmfw.foodietree.domain.customer.entity.Customer;
 
 import java.util.List;
@@ -24,9 +25,8 @@ public interface CustomerMapper {
             @Param("keyword") String keyword
     );
 
-
-    // N선호하는 음식 저장하기
-    void savePreferredFoods(@Param("customerId") String customerId,
+    //선호하는 음식 받아서 저장
+    boolean savePreferredFoods(@Param("customerId") String customerId,
                             @Param("preferredFoods") List<String> preferredFoods);
 
 }

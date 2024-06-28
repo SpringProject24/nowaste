@@ -26,7 +26,7 @@ public class CustomerController {
     private String kakaoApiKey;
     private final CustomerService customerService;
 
-    //회원가입 양식 열기
+    // 회원가입 양식 열기
     @GetMapping("/sign-up")
     public String signUp(Model model) {
         log.info("customer/sign-up GET : forwarding to sign-up.jsp");
@@ -34,18 +34,18 @@ public class CustomerController {
         return "/customer/sign-up";
     }
 
-    //회원가입 요청 처리
+    // 회원가입 요청 처리
     @PostMapping("/sign-up")
     public String signUp(@Validated SignUpDto dto) {
         log.info("/customer/sing-up POST ");
         log.debug("parameter: {}", dto);
-
         boolean flag = customerService.join(dto);
-
+        // 저장에 성공하면 랜더링
         return flag ? "redirect:/product/mainpage" : "redirect:/customer/sign-up";
-        //회원가입 성공시 가게 주소 입력하는 소비자 메인창으로 이동
+        // 회원가입 성공시 가게 주소 입력하는 소비자 메인창으로 이동
 
     }
+
     // 아이디(이메일) 중복 검사
     @GetMapping("/check")
     @ResponseBody
@@ -95,4 +95,6 @@ public class CustomerController {
         //로그인 실패시 다시 로그인 페이지 랜더링
         return "redirect:/customer/sign-in";
     }
+
+
 }

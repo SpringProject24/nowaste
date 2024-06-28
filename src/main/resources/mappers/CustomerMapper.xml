@@ -35,14 +35,15 @@
         WHERE customer_id = #{customerId}
     </select>
 
+    <!-- 선호하는 음식 저장하기 -->
+    <insert id="savePreferredFoods">
+        INSERT INTO tbl_fav_food
+            (customer_id, preferred_food)
+        VALUES
+        <foreach collection="foods" item="food" separator=",">
+            (#{customerId}, #{food})
+        </foreach>
+    </insert>
 
-<!--    &lt;!&ndash; N 선호하는 음식 저장하기 &ndash;&gt;-->
-<!--    <insert id="savePreferredFoods">-->
-<!--        INSERT INTO tbl_fav_food (customer_id, preferred_food)-->
-<!--        VALUES-->
-<!--        <foreach collection="preferredFoods" item="food" separator=",">-->
-<!--            (#{customerId}, #{food})-->
-<!--        </foreach>-->
-<!--    </insert>-->
 
 </mapper>
