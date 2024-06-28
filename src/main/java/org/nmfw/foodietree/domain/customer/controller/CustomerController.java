@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 @Slf4j
 @RequiredArgsConstructor
 public class CustomerController {
+
     @Value("${env.kakao.api.key:default}")
     private String kakaoApiKey;
     private final CustomerService customerService;
@@ -73,6 +74,7 @@ public class CustomerController {
                          RedirectAttributes ra, //리다이렉트 후에도 메시지 유지
                          HttpServletRequest request) { //HTTP 요청 정보 담고 있는 객체(세션)
         log.info("/customer/sign-in POST");
+        log.debug("parameter: {}", dto);
 
         // dto가 null일 경우에 대한 예외 처리
         if (dto == null) {
@@ -84,7 +86,7 @@ public class CustomerController {
         log.debug("parameter: {}", dto);
 
         HttpSession session = request.getSession();
-        LoginResult result = customerService.authenticate(dto);
+        LoginResult result = customerService.authenticate(dto, session);
 
         ra.addFlashAttribute("result", result);
 

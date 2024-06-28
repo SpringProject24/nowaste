@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.nmfw.foodietree.domain.customer.dto.request.CustomerLoginDto;
 import org.nmfw.foodietree.domain.customer.dto.request.SignUpDto;
+import org.nmfw.foodietree.domain.customer.dto.resp.LoginUserInfoDto;
 import org.nmfw.foodietree.domain.customer.entity.Customer;
 import org.nmfw.foodietree.domain.customer.mapper.CustomerMapper;
 import org.nmfw.foodietree.domain.store.service.StoreLoginResult;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 import static org.nmfw.foodietree.domain.store.service.StoreLoginResult.*;
@@ -53,7 +55,7 @@ public class CustomerService {
 
 
 	//로그인 검증 처리
-	public LoginResult authenticate(CustomerLoginDto dto) {
+	public LoginResult authenticate(CustomerLoginDto dto, HttpSession session) {
 
 		// 회원가입 여부 확인
 		String customerId = dto.getCustomerId();
@@ -75,23 +77,20 @@ public class CustomerService {
 
 		log.info("{}님 로그인 성공", foundCustomer.getNickName());
 
+
+		//세션 최대 비활성화 간격
+		int maxInactiveInterval = session.getMaxInactiveInterval();
+
+		//세션 수명 1시간 설정
+		session.setMaxInactiveInterval(60 * 60);
+		log.debug("session time: {}", maxInactiveInterval);
+
+		session.setAttribute("login", new LoginUserInfoDto(foundCustomer) );
+
 		return LoginResult.SUCCESS;
-
-
-//		//세션 최대 비활성화 간격
-//		int maxInactiveInterval = session.getMaxInactiveInterval();
-//
-//		//세션 수명 1시간 설정
-//		session.setMaxInactiveInterval(60 * 60);
-//		log.debug("session time: {}", maxInactiveInterval);
-//
-//		session.setAttribute("loginUserName", foundCustomer.getNickName());
-//
-//		return SUCCESS;
-//	}
-
 	}
 
+	// 아이디 중복 검사
 	public boolean checkIdentifier(String keyword) {
 		return customerMapper.existsById(keyword);
 	}

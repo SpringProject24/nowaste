@@ -11,9 +11,20 @@
 <body>
 <header>
     <div class="container">
-        <div class="logo">FoodieTree</div>
+        <div class="logo">FoodieTree ${login.customerId}</div>
         <div class="logo-img">
             <img src="/assets/img/img_2.png" alt="">
+        </div>
+        <div>
+            <c:if test="${login == null}">
+                <li><a href="/customer/sign-up">Sign Up</a></li>
+                <li><a href="/customer/sign-in">Sign In</a></li>
+              </c:if>
+          
+              <c:if test="${login != null}">
+                <li><a href="#">My Page</a></li>
+                <li><a href="#">Sign Out</a></li>
+              </c:if>
         </div>
     </div>
 </header>
@@ -24,7 +35,7 @@
     </div>
     <div class="form-wrapper">
         <div class="sign-in">
-            <form action="/customer/sign-in" method="post">
+            <form action="#" method="post">
                 <div class="container">
                     <div class="input-wrapper">
                         <input type="text" name="account" placeholder="아이디">
