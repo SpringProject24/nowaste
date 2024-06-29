@@ -24,7 +24,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/customer")
 public class CustomerMyPageController {
-    String customerId = "sji4205@naver.com";
+    String customerId = "test@gmail.com";
     private final CustomerMyPageService customerMyPageService;
 
     @GetMapping("/mypage")
