@@ -7,10 +7,7 @@ import org.nmfw.foodietree.domain.customer.service.CustomerMyPageService;
 import org.nmfw.foodietree.domain.reservation.service.ReservationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +25,21 @@ public class ReservationController {
     public ResponseEntity<List<MyPageReservationDetailDto>> getReservationList(@PathVariable String customerId) {
         List<MyPageReservationDetailDto> reservations = customerMyPageService.getReservationInfo(customerId);
         return ResponseEntity.ok().body(reservations);
+    }
+
+    @PatchMapping("/{reservationId}/cancel")
+    public ResponseEntity<?> cancelReservation(@PathVariable int reservationId) {
+        log.info("cancel reservation");
+        boolean flag = reservationService.cancelReservation(reservationId);
+
+        return flag ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
+    }
+
+    @PatchMapping("/{reservationId}/pickup")
+    public ResponseEntity<?> completePickup(@PathVariable int reservationId) {
+        log.info("complete pickup");
+        boolean flag = reservationService.completePickup(reservationId);
+
+        return flag ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
 }

@@ -37,6 +37,7 @@ function appendReservations(reservations) {
                 <span>${storeName}</span>
                 <span>${status}</span>
                 <span>${statusInfo}</span>
+                ${status === 'RESERVED' ? '<button class="reservation-cancel-btn">예약 취소</button>' : ''}
             </div>
             `;
         });
@@ -44,10 +45,8 @@ function appendReservations(reservations) {
         tag = `<div class='reservation-list'>예약 내역이 없습니다.</div>`;
     }
 
-    $reservationList.innerHTML += tag;
+    $reservationList.innerHTML = tag;
     console.log('appendReservations() 실행');
-
-    // loadedReservations += reservations.length;
 }
 
 async function fetchReservations() {
@@ -60,9 +59,6 @@ async function fetchReservations() {
         console.log(reservations);
         appendReservations(reservations);
 
-        // 다음 페이지가 있는지 여부를 업데이트
-        // hasNextPage = reservations.length === 10;
-        // currentPage++;
     } catch (error) {
         console.error('Error fetching reservations:', error);
     } finally {
@@ -98,8 +94,39 @@ function formatDate(isoDate) {
     return formattedDate;
 }
 
+// 예약 취소
+const fetchCancelReservation = async (reservationId) => {
+    console.log(reservationId);
+    const res = await fetch(`${BASE_URL}/reservation/${reservationId}/cancel`, {
+        method: 'PATCH'
+    });
+
+    if (res.status !== 200) {
+        alert('취소에 실패했습니다!');
+        return;
+    }
+
+    $reservationList.scrollTo(0, 0); // 취소 후 페이지 상단으로 이동
+    await fetchReservations();
+};
+
+// 예약 취소 처리 클릭 이벤트
+function cancelReservationClickEvent() {
+    $reservationList.addEventListener('click', e => {
+        e.preventDefault();
+        if (!e.target.matches('.reservation-cancel-btn')) return;
+
+        if (!confirm('픽업시간 기준 1시간 이내로 예약 취소시 취소 수수료 50%가 부과됩니다. 정말 취소하시겠습니까?')) return;
+
+        const reservationId = e.target.closest('.reservation-item').dataset.reservationId;
+
+        fetchCancelReservation(reservationId);
+    });
+}
+
 // =========== 함수 샐행 ================
 document.addEventListener('DOMContentLoaded', () => {
     fetchReservations(); // 초기 예약 데이터 로드
     setupInfiniteScroll(); // 무한 스크롤 설정
+    cancelReservationClickEvent(); // 예약 취소 이벤트 설정
 });
