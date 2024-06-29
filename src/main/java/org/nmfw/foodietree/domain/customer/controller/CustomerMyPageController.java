@@ -46,7 +46,7 @@ public class CustomerMyPageController {
         model.addAttribute("customerMyPageDto", customerMyPageDto);
         model.addAttribute("reservations", myPageReservationDetailDto);
         model.addAttribute("issues", customerIssueDetailDto);
-        return "customer/customer-mypage-test";
+        return "customer/mypage";
     }
 
     @GetMapping("/customer-mypage-edit")
@@ -65,7 +65,7 @@ public class CustomerMyPageController {
         model.addAttribute("customerMyPageDto", customerMyPageDto);
         model.addAttribute("reservations", myPageReservationDetailDto);
         model.addAttribute("issues", customerIssueDetailDto);
-        return "customer/customer-mypage-edit-test";
+        return "customer/mypage-edit";
     }
 
 
