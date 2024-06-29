@@ -71,6 +71,7 @@
 
     <select id="findReservations" resultType="ReservationDetail">
         SELECT
+            r.reservation_id,
             r.customer_id,
             r.product_id,
             r.reservation_time,

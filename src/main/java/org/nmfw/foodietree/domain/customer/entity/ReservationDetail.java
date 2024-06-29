@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Builder
 public class ReservationDetail {
     //tbl_reservation
+    private int reservationId;
     private String customerId;
     private String productId;
     private LocalDateTime reservationTime;

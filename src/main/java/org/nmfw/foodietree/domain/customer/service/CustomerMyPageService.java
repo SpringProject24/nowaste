@@ -60,13 +60,14 @@ public class CustomerMyPageService {
         List<ReservationDetail> reservations = customerMyPageMapper.findReservations(customerId);
 
         return reservations.stream().map(reservation -> MyPageReservationDetailDto.builder()
+                .reservationId(reservation.getReservationId())
                 .customerId(reservation.getCustomerId())
                 .nickname(reservation.getNickname())
                 .reservationTime(reservation.getReservationTime())
                 .cancelReservationAt(reservation.getCancelReservationAt())
                 .pickedUpAt(reservation.getPickedUpAt())
                 .status(determinePickUpStatus(reservation))
-                .pickUpTime(reservation.getPickupTime())
+                .pickupTime(reservation.getPickupTime())
                 .storeName(reservation.getStoreName())
                 .storeImg(reservation.getStoreImg())
                 .build()
