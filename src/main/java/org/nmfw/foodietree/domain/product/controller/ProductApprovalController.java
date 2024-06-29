@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
 
 @Controller
-@RequestMapping("/storeMyPage")
+@RequestMapping("/store")
 @Slf4j
 @RequiredArgsConstructor
 public class ProductApprovalController {
@@ -24,19 +25,18 @@ public class ProductApprovalController {
     @Value("${file.upload.root-path}")
     private String rootPath;
 
-    @Autowired
     private final ProductApprovalService productApprovalService;
 
-    @GetMapping("/productApproval-form")
+    @GetMapping("/product")
     public String newProductApproval(HttpSession session) {
 
         // 세션에서 로그인된 사용자 ID 가져오기
 //        String storeId = (String) session.getAttribute("storeId");
 
-        return "Product/product-form";
+        return "product/product-form";
     }
 
-    @PostMapping("/productApproval-result")
+    @PostMapping("/product")
     public String approveProduct(@Validated ProductApprovalDto productDto, Model model, HttpSession session) {
 
         // 세션에서 로그인된 사용자 ID 가져오기
@@ -56,6 +56,10 @@ public class ProductApprovalController {
         String profilePath = null;
         if (!proImage.isEmpty()) {
             // 서버에 업로드 후 업로드 경로 반환
+            File dir = new File(rootPath);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
             profilePath = FileUtil.uploadFile(rootPath, proImage);
         }
 

@@ -58,7 +58,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <div class="container">
       <h1>업체 등록</h1>
       <form
-        action="/storeMyPage/productApproval-result"
+        action="/store/product"
         method="post"
         enctype="multipart/form-data"
       >
