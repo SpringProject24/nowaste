@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -35,6 +36,18 @@ public class CustomerController {
         return "/customer/sign-up";
     }
 
+    @PostMapping("/sign-up")
+    public String signUp(@Validated SignUpDto dto, BindingResult result) {
+        if (result.hasErrors()) {
+            return "/customer/sign-up";
+        }
+
+        boolean flag = customerService.join(dto);
+        return flag ? "redirect:/product/sign-in" : "redirect:/customer/sign-up";
+    }
+
+
+/* 기존코드
     // 회원가입 요청 처리
     @PostMapping("/sign-up")
     public String signUp(@Validated SignUpDto dto) {
@@ -46,6 +59,7 @@ public class CustomerController {
         // 회원가입 성공시 가게 주소 입력하는 소비자 메인창으로 이동
 
     }
+*/
 
     // 아이디(이메일) 중복 검사
     @GetMapping("/check")
@@ -83,8 +97,10 @@ public class CustomerController {
             return "redirect:/customer/sign-in";
         }
 
+        // null이 아닐 경우 (로그인이 성공할 경우)
         log.debug("parameter: {}", dto);
 
+        // 세션처리
         HttpSession session = request.getSession();
         LoginResult result = customerService.authenticate(dto, session);
 

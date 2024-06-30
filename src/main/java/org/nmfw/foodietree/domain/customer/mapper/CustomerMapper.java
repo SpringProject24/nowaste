@@ -2,7 +2,6 @@ package org.nmfw.foodietree.domain.customer.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.nmfw.foodietree.domain.customer.dto.request.SignUpDto;
 import org.nmfw.foodietree.domain.customer.entity.Customer;
 
 import java.util.List;

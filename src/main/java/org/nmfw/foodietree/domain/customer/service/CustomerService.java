@@ -29,6 +29,28 @@ public class CustomerService {
 
 	//회원 가입 중간 처리 (저장 성공 여부 boolean 값으로 반환)
 	public boolean join(SignUpDto dto) {
+		Customer customer = dto.toEntity();
+
+		// 비밀번호를 인코딩(암호화)
+		String encodedPassword = encoder.encode(dto.getCustomerPassword());
+		customer.setCustomerPassword(encodedPassword); //인코딩 된 비밀번호를 Customer에 주입
+
+		boolean saved = customerMapper.save(customer); //데이터에 저장
+
+		if (saved && dto.getFood() != null) {
+			customerMapper.savePreferredFoods(dto.getCustomerId(), dto.getFood());
+		}
+
+		System.out.println("\nsave = " + saved);
+		System.out.println(dto.getFood());
+
+		return saved; // 데이터 저장 결과 반환
+	}
+
+	/* 기존코드
+
+	//회원 가입 중간 처리 (저장 성공 여부 boolean 값으로 반환)
+	public boolean join(SignUpDto dto) {
 
 		Customer customer = dto.toEntity();
 
@@ -39,19 +61,7 @@ public class CustomerService {
 		return customerMapper.save(customer); //데이터에 저장
 	}
 
-//	// 아이디 형식: 영문자(대소문자 구분 없음), 소문자로 구성,
-//	// 길이는 5~20 사이, 특수문자 불가
-//        if(!id.matches("^[a-zA-Z0-9]{5,20}$")) {
-//            throw new IllegalArgumentException("아이디 형식이 틀렸습니다.");
-//        }
-//        // 비밀번호 형식: 길이가 최대 8글자 이면서, 영문자, 숫자 포함
-//        if(!password.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{1,8}$")) {
-//            throw new IllegalArgumentException("비밀번호 형식이 틀렸습니다.");
-//        }
-
-//        if(!customerMapper.existsById(dto.getCustomerId())) {
-//            throw new IllegalArgumentException("존재하지 않는 아이디입니다.");
-//        }
+	 */
 
 
 	//로그인 검증 처리
@@ -75,6 +85,7 @@ public class CustomerService {
 			return LoginResult.NO_PW;
 		}
 
+
 		log.info("{}님 로그인 성공", foundCustomer.getNickName());
 
 
@@ -82,7 +93,7 @@ public class CustomerService {
 		int maxInactiveInterval = session.getMaxInactiveInterval();
 
 		//세션 수명 1시간 설정
-		session.setMaxInactiveInterval(60 * 60);
+		session.setMaxInactiveInterval(1800);
 		log.debug("session time: {}", maxInactiveInterval);
 
 		session.setAttribute("login", new LoginUserInfoDto(foundCustomer) );
