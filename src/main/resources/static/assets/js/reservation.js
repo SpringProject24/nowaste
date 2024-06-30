@@ -7,8 +7,11 @@ const $reservationList = document.querySelector('.reservation-list');
 // 모달 관련 요소
 const $reservationModal = document.getElementById('reservation-modal');
 const $modalDetails = document.getElementById('modal-details');
-const $closeModal = document.querySelector('.close');
-const $completePickupBtn = document.getElementById('complete-pickup-btn');
+
+// 추가된 모달 요소
+const $cancelModal = document.getElementById('cancel-modal');
+const $cancellationModal = document.getElementById('cancellation-modal');
+const $closeModalButtons = document.querySelectorAll('.close');
 
 let currentPage = 1;
 let isFetching = false; // 데이터 불러오는 중에는 더 가져오지 않도록 제어
@@ -133,22 +136,40 @@ const fetchCancelReservation = async (reservationId) => {
 // 예약 취소 처리 클릭 이벤트
 function cancelReservationClickEvent() {
     $reservationList.addEventListener('click',async e => {
+        let tag = ``;
+
+        tag += `<p>픽업시간 기준 1시간 이내로 예약 취소시 취소 수수료 50%가 부과됩니다. 정말 취소하시겠습니까?</p>
+                <p>취소 수수료 계산해서 알려줘야함!!</p>
+                <p>취소 수수료는 결제 금액에서 자동 차감됩니다.</p>`;
+
+        let tag2 = ``;
+        tag2 += `<p>정말 취소하시겠습니까?</p>
+                <p>취소 하는 상품 상세 내역 보여주기</p>`;
+
         e.preventDefault();
         if (!e.target.matches('.reservation-cancel-btn')) return;
 
         const reservationId = e.target.closest('.reservation-item').dataset.reservationId;
         const isCancelAllowed = await fetchIsCancelAllowed(reservationId);
-        // 픽업시간이 1시간 이내라면
+        // 픽업시간이 1시간 이내라면 취소 수수료 모달 열기
         if (!isCancelAllowed) {
-            if (!confirm('픽업시간 기준 1시간 이내로 예약 취소시 취소 수수료 50%가 부과됩니다. 정말 취소하시겠습니까?')) {
-                return;
-            }
-        }else{
-            if (!confirm('정말 취소하시겠습니까?')) {
-                return;
-            }
+            document.getElementById('modal-cancel').innerHTML = tag + `<button id="confirm-cancel-btn">확인</button>`;
+            openModalver2($cancelModal);
+
+            document.getElementById('confirm-cancel-btn').addEventListener('click', () => {
+                closeModal($cancelModal);
+                fetchCancelReservation(reservationId);
+            }, { once: true }); // 이벤트가 한 번만 발생하도록 설정
+        } else {
+            // 그 외에는 바로 취소
+            document.getElementById('modal-cancel').innerHTML = tag2 + `<button id="confirm-cancel-btn">확인</button>`;
+            openModalver2($cancelModal);
+
+            document.getElementById('confirm-cancel-btn').addEventListener('click', () => {
+                closeModal($cancelModal);
+                fetchCancelReservation(reservationId);
+            }, { once: true }); // 이벤트가 한 번만 발생하도록 설정
         }
-        fetchCancelReservation(reservationId);
     });
 }
 
@@ -184,6 +205,10 @@ function pickUpClickEvent() {
         alert('픽업 완료되었습니다!');
         closeModal();
     });
+}
+
+function openModalver2(modal) {
+    modal.style.display = "block";
 }
 
 // 모달 열기
@@ -222,24 +247,45 @@ function openModal(reservationId) {
     $reservationModal.style.display = "block";
 }
 
-// 모달 닫기
+// 모달 닫기 이벤트
 function closeModal() {
-    $reservationModal.style.display = "none";
+    if (arguments.length === 0) {
+        console.error('No modal element provided to closeModal function.');
+        return;
+    }
+
+    for (let i = 0; i < arguments.length; i++) {
+        const modalElement = arguments[i];
+        if (modalElement) {
+            modalElement.style.display = 'none';
+        }
+    }
 }
 
-// 모달 닫기 이벤트
-$closeModal.addEventListener('click', closeModal);
+// 모든 모달 닫기 버튼에 이벤트 추가
+$closeModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = button.closest('.modal');
+        closeModal(modal);
+    });
+});
 
 // 모달 외부 클릭 시 닫기
 window.addEventListener('click', e => {
     if (e.target === $reservationModal) {
-        closeModal();
+        closeModal($reservationModal);
+    }
+    if (e.target === $cancelModal) {
+        closeModal($cancelModal);
     }
 });
 
 // 모달 열기 이벤트
 $reservationList.addEventListener('click', e => {
+    if (e.target.matches('.reservation-cancel-btn')) return; // 예약 취소 버튼일 경우 모달 열기 방지
+
     if (e.target.closest('.reservation-item')) {
+        openModal($reservationModal);
         openModal(e.target.closest('.reservation-item').dataset.reservationId);
     }
 });

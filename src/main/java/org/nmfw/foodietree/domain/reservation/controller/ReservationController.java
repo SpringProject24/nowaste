@@ -45,10 +45,10 @@ public class ReservationController {
 
     @GetMapping("/{reservationId}/check/cancel")
     public ResponseEntity<?> checkCancel(@PathVariable int reservationId) {
-        log.info("check cancel");
+        log.info("check cancel is allowed without cancel fee");
         boolean flag = reservationService.isCancelAllowed(reservationId);
 
-        return flag ? ResponseEntity.ok().build() : ResponseEntity.badRequest().body("취소 확인 실패");
+        return flag ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/{reservationId}/check/pickup")
