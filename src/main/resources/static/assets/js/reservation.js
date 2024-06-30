@@ -73,8 +73,7 @@ async function fetchReservations() {
 }
 
 function setupInfiniteScroll() {
-    if(($reservationList.scrollHeight - $reservationList.scrollTop <= $reservationList.clientHeight + 50)
-        && !isFetching) {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50 && !isFetching) {
         fetchReservations();
     }
 }
@@ -225,7 +224,7 @@ $reservationList.addEventListener('click', e => {
 // =========== 실행 코드 ================
 document.addEventListener('DOMContentLoaded', () => {
     fetchReservations(); // 초기 예약 데이터 로드
-    setupInfiniteScroll(); // 무한 스크롤 설정
+    window.addEventListener('scroll', setupInfiniteScroll); // 무한 스크롤 설정
     cancelReservationClickEvent(); // 예약 취소 이벤트 설정
     pickUpClickEvent(); // 픽업 완료 이벤트 설정
 });
