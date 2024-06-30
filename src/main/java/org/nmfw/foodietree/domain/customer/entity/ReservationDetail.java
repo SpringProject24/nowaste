@@ -26,7 +26,7 @@ public class ReservationDetail {
     private String storeName;
     private String category;
     private String address;
-    private String price;
+    private int price;
     private String storeImg;
     //tbl_customer
     private String nickname;

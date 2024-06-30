@@ -24,4 +24,5 @@ public class MyPageReservationDetailDto {
     private LocalDateTime pickupTime; // 가게에서 지정한 픽업가능 시간
     private String storeName;
     private String storeImg;
+    private int price;
 }

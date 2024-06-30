@@ -42,4 +42,20 @@ public class ReservationController {
 
         return flag ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
+
+    @GetMapping("/{reservationId}/check/cancel")
+    public ResponseEntity<?> checkCancel(@PathVariable int reservationId) {
+        log.info("check cancel");
+        boolean flag = reservationService.isCancelAllowed(reservationId);
+
+        return flag ? ResponseEntity.ok().build() : ResponseEntity.badRequest().body("취소 확인 실패");
+    }
+
+    @GetMapping("/{reservationId}/check/pickup")
+    public ResponseEntity<?> checkPickup(@PathVariable int reservationId) {
+        log.info("check pickup");
+        boolean flag = reservationService.isPickupAllowed(reservationId);
+
+        return flag ? ResponseEntity.ok().build() : ResponseEntity.badRequest().body("픽업 확인 실패");
+    }
 }

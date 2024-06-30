@@ -70,16 +70,19 @@ public class CustomerMyPageService {
                 .pickupTime(reservation.getPickupTime())
                 .storeName(reservation.getStoreName())
                 .storeImg(reservation.getStoreImg())
+                .price(reservation.getPrice())
                 .build()
         ).collect(Collectors.toList());
     }
 
     private PickUpStatus determinePickUpStatus(ReservationDetail reservation) {
-        if (reservation.getCancelReservationAt() != null) {
-            return PickUpStatus.CANCELED;
-        }else if(reservation.getPickedUpAt() != null) {
+        if (reservation.getPickedUpAt() != null) {
             return PickUpStatus.PICKEDUP;
-        }else{
+        } else if (reservation.getCancelReservationAt() != null) {
+            return PickUpStatus.CANCELED;
+        } else if (reservation.getPickupTime().isBefore(LocalDateTime.now())) {
+            return PickUpStatus.NOSHOW;
+        } else {
             return PickUpStatus.RESERVED;
         }
     }

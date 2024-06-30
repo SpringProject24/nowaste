@@ -37,6 +37,9 @@ function appendReservations(reservations) {
             if (status === 'CANCELED') {
                 statusInfo = `${t3}에 취소하셨습니다`;
             }
+            if (status === 'NOSHOW'){
+                statusInfo = `${t1}에 미방문으로 취소되었습니다`;
+            }
             tag += `
             <div class="reservation-item" data-reservation-id="${reservationId}">
                 <img src="${storeImg}" alt="Store Image"/>
@@ -99,6 +102,18 @@ function formatDate(isoDate) {
     return formattedDate;
 }
 
+
+// 서버에서 예약 취소 가능 여부 확인
+const fetchIsCancelAllowed = async (reservationId) => {
+    const res = await fetch(`${BASE_URL}/reservation/${reservationId}/check/cancel`);
+    console.log(reservationId);
+    if (res.status !== 200) {
+        console.error('Error checking cancel allowed:', await res.text());
+        return false;
+    }
+    return await res.json();
+};
+
 // 예약 취소
 const fetchCancelReservation = async (reservationId) => {
     console.log(reservationId);
@@ -117,14 +132,22 @@ const fetchCancelReservation = async (reservationId) => {
 
 // 예약 취소 처리 클릭 이벤트
 function cancelReservationClickEvent() {
-    $reservationList.addEventListener('click', e => {
+    $reservationList.addEventListener('click',async e => {
         e.preventDefault();
         if (!e.target.matches('.reservation-cancel-btn')) return;
 
-        if (!confirm('픽업시간 기준 1시간 이내로 예약 취소시 취소 수수료 50%가 부과됩니다. 정말 취소하시겠습니까?')) return;
-
         const reservationId = e.target.closest('.reservation-item').dataset.reservationId;
-
+        const isCancelAllowed = await fetchIsCancelAllowed(reservationId);
+        // 픽업시간이 1시간 이내라면
+        if (!isCancelAllowed) {
+            if (!confirm('픽업시간 기준 1시간 이내로 예약 취소시 취소 수수료 50%가 부과됩니다. 정말 취소하시겠습니까?')) {
+                return;
+            }
+        }else{
+            if (!confirm('정말 취소하시겠습니까?')) {
+                return;
+            }
+        }
         fetchCancelReservation(reservationId);
     });
 }

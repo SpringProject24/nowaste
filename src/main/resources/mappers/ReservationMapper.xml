@@ -19,10 +19,12 @@
 
     <select id="findByReservationId" resultType="ReservationStatusDto">
         SELECT
-            reservation_time,
-            cancel_reservation_at,
-            picked_up_at
-        FROM tbl_reservation
+            r.reservation_time,
+            r.cancel_reservation_at,
+            r.picked_up_at,
+            p.pickup_time
+        FROM tbl_reservation r
+        JOIN tbl_product p ON r.product_id = p.product_id
         WHERE reservation_id = #{reservationId}
     </select>
 </mapper>

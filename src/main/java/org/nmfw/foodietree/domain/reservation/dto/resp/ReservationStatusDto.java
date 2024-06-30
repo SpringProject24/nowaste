@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 public class ReservationStatusDto {
     private LocalDateTime reservationTime;
-//    private LocalDateTime pickupTime;
+    private LocalDateTime pickupTime;
     private LocalDateTime cancelReservationAt;
     private LocalDateTime pickedUpAt;
 }
