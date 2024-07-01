@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.nmfw.foodietree.domain.reservation.mapper.ReservationMapper">
+
+    <update id="cancelReservation">
+        UPDATE tbl_reservation
+        SET cancel_reservation_at = NOW()
+        WHERE reservation_id = #{reservationId}
+    </update>
+
+    <update id="completePickup">
+        UPDATE tbl_reservation
+        SET picked_up_at = NOW()
+        WHERE reservation_id = #{reservationId}
+    </update>
+
+    <select id="findByReservationId" resultType="ReservationStatusDto">
+        SELECT
+            r.reservation_time,
+            r.cancel_reservation_at,
+            r.picked_up_at,
+            p.pickup_time
+        FROM tbl_reservation r
+        JOIN tbl_product p ON r.product_id = p.product_id
+        WHERE reservation_id = #{reservationId}
+    </select>
+</mapper>
