@@ -4,7 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Update;
-import org.nmfw.foodietree.domain.customer.dto.resp.*;
+import org.nmfw.foodietree.domain.customer.dto.resp.CustomerIssueDetailDto;
+import org.nmfw.foodietree.domain.customer.dto.resp.CustomerMyPageDto;
+import org.nmfw.foodietree.domain.customer.dto.resp.MyPageReservationDetailDto;
+import org.nmfw.foodietree.domain.customer.dto.resp.UpdateDto;
 import org.nmfw.foodietree.domain.customer.service.CustomerMyPageService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -39,13 +42,10 @@ public class CustomerMyPageController {
         List<MyPageReservationDetailDto> myPageReservationDetailDto = customerMyPageService.getReservationInfo(customerId);
 
         List<CustomerIssueDetailDto> customerIssueDetailDto = customerMyPageService.getCustomerIssues(customerId);
-
-        statsDto stats = customerMyPageService.getStats(customerId);
         // 3. JSP파일에 조회한 데이터 보내기
         model.addAttribute("customerMyPageDto", customerMyPageDto);
         model.addAttribute("reservations", myPageReservationDetailDto);
         model.addAttribute("issues", customerIssueDetailDto);
-        model.addAttribute("stats", stats);
         return "customer/mypage";
     }
 
@@ -61,14 +61,11 @@ public class CustomerMyPageController {
         List<MyPageReservationDetailDto> myPageReservationDetailDto = customerMyPageService.getReservationInfo(customerId);
 
         List<CustomerIssueDetailDto> customerIssueDetailDto = customerMyPageService.getCustomerIssues(customerId);
-
-        statsDto stats = customerMyPageService.getStats(customerId);
         // 3. JSP파일에 조회한 데이터 보내기
         model.addAttribute("customerMyPageDto", customerMyPageDto);
         model.addAttribute("reservations", myPageReservationDetailDto);
         model.addAttribute("issues", customerIssueDetailDto);
-        model.addAttribute("stats", stats);
-        return "customer/mypage";
+        return "customer/mypage-edit";
     }
 
 
