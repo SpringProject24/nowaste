@@ -41,7 +41,7 @@
                         <img src="${reservation.storeImg}" alt="Store Image"/>
                         <span>${reservation.storeName}</span>
                         <span>${reservation.status}</span>
-                        <span>${reservation.pickUpTime}</span>
+                        <span>${reservation.pickupTime}</span>
                     </div>
                 </c:forEach>
             </div>
