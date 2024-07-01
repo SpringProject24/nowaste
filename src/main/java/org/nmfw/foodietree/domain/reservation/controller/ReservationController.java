@@ -2,6 +2,7 @@ package org.nmfw.foodietree.domain.reservation.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.nmfw.foodietree.domain.customer.controller.CustomerMyPageController;
 import org.nmfw.foodietree.domain.customer.dto.resp.MyPageReservationDetailDto;
 import org.nmfw.foodietree.domain.customer.service.CustomerMyPageService;
 import org.nmfw.foodietree.domain.reservation.service.ReservationService;
@@ -20,6 +21,7 @@ public class ReservationController {
     private final ReservationService reservationService;
 
     private final CustomerMyPageService customerMyPageService;
+    private final CustomerMyPageController customerMyPageController;
 
     @GetMapping("/{customerId}")
     public ResponseEntity<List<MyPageReservationDetailDto>> getReservationList(@PathVariable String customerId) {
@@ -47,8 +49,7 @@ public class ReservationController {
     public ResponseEntity<?> checkCancel(@PathVariable int reservationId) {
         log.info("check cancel is allowed without cancel fee");
         boolean flag = reservationService.isCancelAllowed(reservationId);
-
-        return flag ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
+        return flag ? ResponseEntity.ok().body(true) : ResponseEntity.badRequest().body(false);
     }
 
     @GetMapping("/{reservationId}/check/pickup")

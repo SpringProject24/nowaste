@@ -12,9 +12,11 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="/assets/css/common.css">
     <link rel="stylesheet" href="/assets/css/customer/customer-mypage.css">
+    <link rel="stylesheet" href="/assets/css/reservation/reservation-detail-modal.css">
     <script defer src="/assets/js/reservation.js"></script>
 </head>
 <body>
+
 <header>
     <div class="container">
         <div class="logo"><h1>FoodieTree</h1></div>
@@ -142,8 +144,8 @@
                 </div>
             </div>
             <div class="stats">
-                <div>${stats.coTwo}kg의 음쓰를 줄였습니다</div>
-                <div>지금까지 ${stats.money}만원을 아꼈어요</div>
+                <div>00kg의 음쓰를 줄였습니다</div>
+                <div>지금까지 00만원을 아꼈어요</div>
             </div>
         </div>
     </div>
