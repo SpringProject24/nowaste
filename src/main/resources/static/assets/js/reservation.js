@@ -214,7 +214,7 @@ function openModalver2(modal) {
 // 모달 열기
 function openModal(reservationId) {
     const reservationItem = document.querySelector(`.reservation-item[data-reservation-id="${reservationId}"]`);
-
+    console.log(reservationId);
     if (!reservationItem) {
         console.error(`Reservation with ID ${reservationId} not found.`);
         return;

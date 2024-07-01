@@ -8,7 +8,7 @@
     <title>FoodieTree</title>
     <link rel="stylesheet" href="/assets/css/common.css">
     <link rel="stylesheet" href="/assets/css/customer/customer-mypage.css">
-
+    <script defer src="/assets/js/reservation.js"></script>
 </head>
 <body>
 <header>
@@ -87,13 +87,30 @@
                 </c:forEach>
             </div>
             <div class="stats">
-                <div>10kg의 음쓰를 줄였습니다</div>
-                <div>지금까지 10만원을 아꼈어요</div>
+                <div>${stats.coTwo}kg의 음쓰를 줄였습니다</div>
+                <div>지금까지 ${stats.money}만원을 아꼈어요</div>
             </div>
         </div>
     </div>
 </section>
 
+<!-- 모달 창 -->
+<div id="reservation-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>예약 상세 내역</h2>
+        <div id="modal-details"></div>
+    </div>
+</div>
+
+<!-- 모달 창 -->
+<div id="cancel-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>취소 수수료 고지</h2>
+        <div id="modal-cancel"></div>
+    </div>
+</div>
 
 </body>
 </html>
